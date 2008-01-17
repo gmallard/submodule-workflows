@@ -4,14 +4,14 @@ cd $wd
 #
 # Standard (?????) work sequence 
 #
-cd sb.clone.two
+cd sb.clone.one
 cd ab
 #
 # Hack, hack, hack in submodule
 #
-echo fb >fb.txt && git add . && git commit -m "work in two/ab 01"
-echo fbb >>fb.txt && git add . && git commit -m "work in two/ab 02"
-echo fbbb >>fb.txt && git add . && git commit -m "work in two/ab 03"
+echo fb >fb.txt && git add . && git commit -m "work in one/ab 01"
+echo fbb >>fb.txt && git add . && git commit -m "work in one/ab 02"
+echo fbbb >>fb.txt && git add . && git commit -m "work in one/ab 03"
 #
 # Obtain upstream changes
 #

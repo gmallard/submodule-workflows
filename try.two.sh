@@ -4,7 +4,7 @@ cd $wd
 #
 # Standard (?????) update sequence 
 #
-cd sb.clone.one
+cd sb.clone.two
 #
 # Pull in super
 #
