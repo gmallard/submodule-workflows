@@ -15,6 +15,7 @@ do
 	git commit -m "First ignore"
 	cd ..
 	git clone --bare $m $m.bare
+	touch $m.bare/git-daemon-export-ok
 	rm $m.bare.tar.gz
 	tar czvf $m.bare.tar.gz $m.bare
 	#
