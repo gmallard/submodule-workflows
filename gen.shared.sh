@@ -19,8 +19,7 @@ do
 	rm $m.bare.tar.gz
 	tar czvf $m.bare.tar.gz $m.bare
 	#
-	ssh $ruser rm -rf ~/$m.bare.tar.gz
+	ssh $ruser rm -f ~/$m.bare.tar.gz
 	scp $m.bare.tar.gz $ruser:~
-	ssh $ruser rm -rf $rgr/$m
 	#
 done
