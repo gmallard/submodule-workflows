@@ -42,5 +42,7 @@ cd $clone2
 #
 git submodule init
 git submodule update
+cd suba
+git checkout master
 set +x
 

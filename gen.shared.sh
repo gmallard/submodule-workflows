@@ -9,11 +9,12 @@ do
 	rm -rf $m
 	mkdir $m
 	cd $m
-	git init
+	git init --shared=group
 	echo "#" >.gitignore
 	git add .gitignore
 	git commit -m "First ignore"
 	cd ..
+	rm -rf $m.bare
 	git clone --bare $m $m.bare
 	touch $m.bare/git-daemon-export-ok
 	rm $m.bare.tar.gz
