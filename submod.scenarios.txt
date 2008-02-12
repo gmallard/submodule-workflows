@@ -1,0 +1,89 @@
+
+=======
+Scenario 1
+
+General Description:
+
+TBD
+
+Timeline:
+
+S---1---2----------------------------------------------------------------------
+
+S--------------3---4-----------------------------------------------------------
+
+Details:
+
+Commit/Push  1:
+
+cd supa.cloned.one
+cd suba
+echo a >a.txt
+git add .
+git commit -m "Add file a.txt"
+git pull
+git push
+#
+
+Commit/Push  2:
+
+cd ..
+git status
+git commit -a -m "Update suba with a.txt"
+git pull
+git push
+
+Commit/Push  3:
+
+# Prep
+cd supa.cloned.two
+git pull
+git submodule update
+cd suba
+git checkout master
+git pull
+
+# add work
+echo b >b.txt
+git add .
+git commit -m "Add file b.txt"
+git pull
+git push
+#
+
+Commit/Push  4:
+
+cd ..
+git status
+git commit -a -m "Update suba with b.txt"
+git pull
+git push
+
+# But now supa.cloned.one needs to pull + update + checkout + pull
+
+
+=======
+Scenario 2
+
+General Description:
+
+TBD
+
+Timeline:
+
+S---1----------3---------------------------------------------------------------
+
+S---------2---------4----------------------------------------------------------
+
+=======
+Scenario 3
+
+General Description:
+
+TBD
+
+Timeline:
+
+S---1---------------4----------------------------------------------------------
+
+S---------2---3----------------------------------------------------------------
