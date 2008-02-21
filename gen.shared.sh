@@ -1,12 +1,12 @@
 #!/bin/bash
+set -x
 wd=/home/gallard/gw
+rm -rf $wd
 mkdir $wd
-cd $wd
-ruser=gallard@jeb
-rgr=/opt/gitroot
 #
-for m in suba supa
+for m in suba subb
 do
+	cd $wd
 	rm -rf $m
 	mkdir $m
 	cd $m
@@ -17,14 +17,44 @@ do
 	git commit -m "First ignore"
 	cd ..
 	rm -rf $m.bare
-	git clone --bare $m $m.bare
-	touch $m.bare/git-daemon-export-ok
-	find $m.bare -type d -exec chmod 2775 {} \;
-	find $m.bare -type f -exec chmod 644 {} \;
-	rm $m.bare.tar.gz
-	tar czvf $m.bare.tar.gz $m.bare
-	#
-	ssh $ruser rm -f ~/$m.bare.tar.gz
-	scp $m.bare.tar.gz $ruser:~
+	git clone --bare $m $m.git
+	rm -rf /public/$m.git
+	mv $m.git /public
 	#
 done
+for m in super
+do
+	cd $wd
+	rm -rf $m
+	mkdir $m
+	cd $m
+	# git init --shared=group
+	git init
+	echo "#" >.gitignore
+	git add .gitignore
+	git commit -m "First ignore"
+	#
+	git submodule add file:///public/suba.git
+	git submodule add file:///public/subb.git
+	git add .
+	git commit -m "Add submodules."
+	#
+	cd ..
+	rm -rf $m.bare
+	git clone --bare $m $m.git
+	rm -rf /public/$m.git
+	mv $m.git /public
+	#
+done
+#
+for d in testa testb
+do
+	mkdir -p $wd/$d
+	cd $wd/$d
+	git clone file:///public/super.git super
+	cd $wd/$d/super
+	git submodule init
+	git submodule update
+done
+#
+set +x
