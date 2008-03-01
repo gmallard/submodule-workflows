@@ -3,8 +3,11 @@ set -x
 wd=/home/gallard/gw
 rm -rf $wd
 mkdir $wd
+submods="suba subb"
+testrepos="testa testb"
+supers="super"
 #
-for m in suba subb
+for m in $submods
 do
 	cd $wd
 	rm -rf $m
@@ -22,7 +25,7 @@ do
 	mv $m.git /public
 	#
 done
-for m in super
+for m in $supers
 do
 	cd $wd
 	rm -rf $m
@@ -47,7 +50,7 @@ do
 	#
 done
 #
-for d in testa testb
+for d in $testrepos
 do
 	mkdir -p $wd/$d
 	cd $wd/$d
@@ -55,6 +58,13 @@ do
 	cd $wd/$d/super
 	git submodule init
 	git submodule update
+	for sm in $submods
+	do
+		cd $sm
+		git checkout master
+		git pull
+		cd ..
+	done
 done
 #
 set +x

@@ -1,17 +1,18 @@
 #!/bin/bash
 wd=/home/gallard/gw
+submods="suba subb"
+testrepos="testa testb"
+supers="super"
 #
-cd $wd/sb.clone.one
-echo "status in sb.clone.one"
-git status
-cd ab
-echo "status in sb.clone.one/ab"
-git status
-#
-cd $wd/sb.clone.two
-echo "status in sb.clone.two"
-git status
-cd ab
-echo "status in sb.clone.two/ab"
-git status
-
+for tr in $testrepos
+do
+	for sp in $supers
+	do
+		for sm in $submods
+		do
+			cd $wd/$tr/$sp/$sm
+			echo $(pwd)
+			git status
+		done
+	done
+done
