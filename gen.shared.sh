@@ -26,6 +26,7 @@ do
 	git clone --bare $m $m.git
 	rm -rf /public/$m.git
 	mv $m.git /public
+	rm -rf $m
 	#
 done
 for m in $supers
@@ -52,6 +53,7 @@ do
 	git clone --bare $m $m.git
 	rm -rf /public/$m.git
 	mv $m.git /public
+	rm -rf $m
 	#
 done
 #
