@@ -3,9 +3,12 @@ set -x
 wd=/home/gallard/gw
 rm -rf $wd
 mkdir $wd
+# Submodules to create.
 submods="suba subb"
-testrepos="testa testb"
+# Only do one super.
 supers="super"
+# Clones of super to create.
+testrepos="testa testb"
 #
 for m in $submods
 do
@@ -37,8 +40,10 @@ do
 	git add .gitignore
 	git commit -m "First ignore"
 	#
-	git submodule add file:///public/suba.git
-	git submodule add file:///public/subb.git
+	for sm in $submods
+	do
+		git submodule add file:///public/$sm.git
+	done
 	git add .
 	git commit -m "Add submodules."
 	#
