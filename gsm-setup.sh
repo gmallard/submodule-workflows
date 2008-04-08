@@ -83,8 +83,8 @@ git checkout master
 echo "adding a line again" >> a.txt
 git commit -a -m "Updated the submodule from within the superproject."
 
-echo "adding yet another" >> a.txt
-git commit -a -m "Updated the submodule from within the superproject again."
+# echo "adding yet another" >> a.txt
+# git commit -a -m "Updated the submodule from within the superproject again."
 
 git push
 cd ..
