@@ -65,13 +65,19 @@ do
 	cd $wd/$d/super
 	git submodule init
 	git submodule update
+###############	
+# Does nothing ?
+# Well, the pull does nothing, but the checkout of master
+# makes a difference in subsequent workflow (??).
+###############	
 	for sm in $submods
 	do
 		cd $sm
 		git checkout master
-		git pull
+#		git pull
 		cd ..
 	done
+###############		
 done
 #
 set +x
