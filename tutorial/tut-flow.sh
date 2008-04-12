@@ -102,7 +102,7 @@ git submodule update
 # This logic not in the submodule tutorial ? Why ?
 cd a
 git checkout master
-pit pull
+git pull
 cat a.txt
 
 #
