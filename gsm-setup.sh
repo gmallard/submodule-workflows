@@ -98,7 +98,12 @@ git push
 cd ~/subtut/private/super
 git pull
 git submodule update
-cat a/a.txt
+# cat a/a.txt
+# This logic not in the submodule tutorial ? Why ?
+cd a
+git checkout master
+pit pull
+cat a.txt
 
 #
 
