@@ -23,7 +23,4 @@ do
 		git add $submod
 		git commit -m "In repo: $repo, add submodule: $submod"
 	done
-	# git submodule init
-	# git add .
-	# git commit -m "Add submodules - $repo"
 done

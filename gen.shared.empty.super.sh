@@ -1,6 +1,8 @@
 #!/bin/bash
 set -x
 wd=/home/gallard/gw
+rm -rf $wd
+mkdir $wd
 # Only do one super.
 supers="super"
 #
