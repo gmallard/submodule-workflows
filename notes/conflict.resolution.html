@@ -1,0 +1,79 @@
+<html>
+<head>
+<title>
+Merge Conflict Resolution
+</title>
+</head>
+<body>
+<h1>git push Fails</h1>
+<p>
+If you attempt to push, e.g.:
+</p>
+<pre>
+git push
+</pre>
+<p>and the result is like:</p>
+<pre>
+ ! [rejected]        master -> master (non-fast forward)
+error: failed to push some refs to '/home/gallard/subtut/public/super/.git'
+</pre>
+<p>You probably need to pull, and (assuming a successful merge), then push again.
+But note: this pull could yield a merge conflict</p>
+<pre>
+git pull
+.
+.
+git push
+</pre>
+<h1>Normal Merge Conflicts</h1>
+<p>
+If you get merge conflicts when you 'pull and push', and they are normal file conflicts, fix 
+them per normal procedures.  This will look something like:
+</p>
+<pre>
+git pull
+remote: Counting objects: 5, done.
+remote: Compressing objects: 100% (2/2)remote: , done.
+remote: Total 3 (delta 0), reused 0 (delta 0)
+Unpacking objects: 100% (3/3), done.
+From /home/gallard/subtut/public/a/
+   87ff7c1..7eb223f  master     -> origin/master
+Auto-merged a.txt
+CONFLICT (content): Merge conflict in a.txt
+Automatic merge failed; fix conflicts and then commit the result.
+</pre>
+<p>Fix per normal git procedures:
+</p>
+<pre>
+vi a.txt
+git add a.txt
+git commit
+</pre>
+<h1>Merge Conflicts in a Supermodule</h1>
+<p>
+If you are in a super-module, and get conflict error messages during a
+'pull and push' like:
+</p>
+<pre>
+git pull
+remote: Counting objects: 4, done.
+remote: Compressing objects: 100% (3/3), done.
+remote: Total 3 (delta 2), reused 0 (delta 0)
+Unpacking objects: 100% (3/3), done.
+From /home/gallard/subtut/public/super/
+   7ca8903..1440a56  master     -> origin/master
+Auto-merged a
+CONFLICT (submodule): Merge conflict in a - needs 7d60be49cea14ce00dba02db768850a959e45d6a
+</pre>
+<p>
+you should run a:
+</p>
+<pre>
+git submodule update
+git add a
+git commit -m "Update submod for merge conflict"
+#  And then remember the push
+git push
+</pre>
+</body>
+</html>
