@@ -1,5 +1,22 @@
 #!/bin/bash
 set -x
+#
+# This is almost a direct cut and paste from the submodule example given at:
+# http://git.or.cz/gitwiki/GitSubmoduleTutorial
+#
+# Most comments in the code are also cut and paste from the commentary
+# at that location.
+#
+# ---------------------------------------------------------------------------------------------------------------
+#
+# Submodules maintain their own identity; the submodule support just stores the 
+# submodule repository location and commit ID, so other developers who 
+# clone the superproject can easily clone all the submodules at the same revision.
+#
+# For the purposes of the tutorial, the public repositories will be published under 
+# your home directory in ~/subtut/public. Let's create the four public 
+# submodule repositories first:
+#
 rm -rf ~/subtut
 mkdir ~/subtut ~/subtut/public
 cd ~/subtut/public
@@ -12,99 +29,127 @@ for mod in a b c d; do
     git commit -m "Initial commit, public module $mod"
     cd ..
 done
-
+#
 # Now create the public superproject; we won't actually add the submodules yet.
-
+#
 mkdir super
 cd super
 git init
 echo hi > super.txt
 git add super.txt
 git commit -m "Initial commit of empty superproject"
-
+#
 # Check out the superproject somewhere private and add all the submodules.
-
+#
 mkdir ~/subtut/private
 cd ~/subtut/private
 git clone ~/subtut/public/super
 cd super
-
+#
 for mod in a b c d; do git submodule add ~/subtut/public/$mod; done
 ls -a
-
+#
 # The "git submodule add" command does a couple of things:
-
+#
 #     * It clones the submodule under the current directory and by default checks out the master branch.
 #     * It adds the submodule's clone path to the ".gitmodules" file and adds this file to the index, ready to be committed.
 #     * It adds the submodule's current commit ID to the index, ready to be committed. 
-
+#
 cat .gitmodules
-
+#
 git status
-
+#
 # Let's take a quick poke around one of the submodule checkouts.
-
+#
 cd a
 ls -a
-
+#
 git branch
-
+#
 # It looks just like a regular checkout:
-
+#
 cat .git/config
-
+#
 # Commit the superproject and publish it:
-
+#
 cd ..
 git commit -m "Add submodules a, b, c, d."
 git push
-
+#
 # Now look at it from the perspective of another developer:
-
+#
 mkdir ~/subtut/private2
+#
+# cd !$   # replaced with ....
+#
 cd ~/subtut/private2
-# cd !$
 git clone ~/subtut/public/super
 cd ~/subtut/private2/super
-
-# Pulling down the submodules is a two-step process. First run "git submodule init" to add the submodule repository URLs to .git/config:
-
+ls -a
+#
+# The submodule directories are there, but they're empty:
+#
+ls -a a
+git submodule status
+#
+# Pulling down the submodules is a two-step process. First run "git submodule init" 
+# to add the submodule repository URLs to .git/config:
+#
 git submodule init
 git config -l
-
-# Now use "git submodule update" to clone the repositories and check out the commits specified in the superproject.
-
+#
+# Now use "git submodule update" to clone the repositories and check out the 
+# commits specified in the superproject.
+#
 git submodule update
 cd a
 ls -a
-
+#
+# One major difference between "submodule update" and "submodule add" is that 
+# "update" checks out a specific commit, rather than the tip of a branch. It's 
+# like checking out a tag: the head is detached, so you're not working 
+# on a branch.
+#
+git branch
+#
+# If you want to make a change within a submodule, you should first check out a 
+# branch, make your changes, publish the change within the submodule, and 
+# then update the superproject to reference the new commit:
+#
 git branch
 git checkout master
 echo "adding a line again" >> a.txt
 git commit -a -m "Updated the submodule from within the superproject."
-
-# echo "adding yet another" >> a.txt
-# git commit -a -m "Updated the submodule from within the superproject again."
-
 git push
 cd ..
 git add a
 git commit -m "Updated submodule a."
 git show | cat
 git push
-
+#
 # Switch back to the other private checkout; the new change should be visible.
-
+# 
 cd ~/subtut/private/super
 git pull
 git submodule update
+#
+# Here we run in to trouble.  The command in the tutorial is:
+#
 # cat a/a.txt
-# This logic not in the submodule tutorial ? Why ?
+#
+# However that yeilds incorrect results:  the new change is in fact not
+# visible.
+#
+# The following does work:
+# - cd to the submodule directory
+# - checkout the master brnach
+# - run pull
+# 
 cd a
 git checkout master
 git pull
-cat a.txt
-
 #
-
+# Display the file with the new change.
+#
+cat a.txt
 set +x

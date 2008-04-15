@@ -1,5 +1,8 @@
 #!/bin/bash
 set -x
+#
+# Pick up private clone name from command line.
+#
 p=$1
 cd ~/subtut/$p/super
 #
