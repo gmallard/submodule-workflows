@@ -1,5 +1,8 @@
 #!/bin/bash
 set -x
+#
+# Pick up private clone name from command line.
+#
 repo=$1
 wd=/home/gallard/gw
 cd $wd/$repo/super/suba
