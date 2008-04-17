@@ -13,7 +13,8 @@ The Salted Supermodule Examples
 <p>Required components and environment are:</p>
 <ul>
 <li>An installed and working version of git</li>
-<li>A top level directory named <em>/public</em> that is writable by anyone.  
+<li>A top level directory named <em>/public/repos</em> that is writable by anyone in the 'git'
+group.
 To change this name, you must modify the scripts</li>
 </ul>
 <h1>Instructions</h1>
@@ -21,10 +22,23 @@ To change this name, you must modify the scripts</li>
 following order:</p>
 <ol>
 <li>./gen.shared.sh</li>
-<li>./uc-001.sh</li>
+</ol>
+<p>From different users, or multiple instances of the same user, arrange to:</p>
+<ol>
+<li>Create a private work directory</li>
+<li>CD in to that directory</li>
+<li>Have the scripts in $PATH</li>
+</ol>
+<p>And then in each user or instance, do:</p>
+<ol>
+<li>clone-001.sh</li>
+</ol>
+<p>And then:</p>
+<ol>
+<li>uc-001.sh</li>
 </ol>
 <p>The latter script may be executed multiple times.</p>
-<h1>Read the Code</h1>
+<h1>Read the script code</h1>
 <p>Well, ......</p>
 <hr />
 <p>Back to main page: <a href="../readme.html">Main</a>

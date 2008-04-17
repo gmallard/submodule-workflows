@@ -1,22 +1,19 @@
 #!/bin/bash
 set -x
 #
-# Pick up private clone name from command line.
-#
-repo=$1
-wd=/home/gallard/gw
-cd $wd/$repo/super/suba
+umask 002
 #
 # Do work in a submodule
 #
-echo aline  submod:  $repo >>a.txt
+cd suba
+echo aline  submod:  $repo  user: $USER >>a.txt
 git add .
-git commit -m "Add a line in $repo"
+git commit -m "Add a line in repo: $repo, user $USER"
 git pull && git push
 #
 # Update supermodule
 #
 cd ..
 git add .
-git commit -m "update submodule in $repo"
+git commit -m "update submodule $repo, user $USER"
 git pull && git push
