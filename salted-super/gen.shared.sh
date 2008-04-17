@@ -3,27 +3,12 @@ set -x
 #
 # Housekeeping: set up working directory for this test.
 #
-wd=/home/gallard/gw
+here=$(dirname $0)
+. $here/../common/setvars
+#
+wd=$home/$user/gw
 rm -rf $wd
 mkdir $wd
-user=gallard
-group=git
-#
-# Location of public read/write area
-#
-public=/public/repos
-#
-# List of submodules to create.
-#
-submods="suba subb"
-#
-# Only do one super.
-#
-supers="super"
-#
-# List of clones of super to create.
-#
-testrepos="testa testb"
 #
 # Submodules:
 # - Create empty repo

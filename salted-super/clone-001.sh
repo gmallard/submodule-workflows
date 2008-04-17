@@ -3,22 +3,10 @@ set -x
 #
 umask 002
 #
-# Housekeeping.
+# Housekeeping: set up working directory for this test.
 #
-user=gallard
-group=git
-#
-# Location of public read/write area
-#
-public=/public/repos
-#
-# List of submodules to create.
-#
-submods="suba subb"
-#
-# Only do one super.
-#
-supers="super"
+here=$(dirname $0)
+. $here/../common/setvars
 #
 # Test repository:
 # - Clone the public supermodule

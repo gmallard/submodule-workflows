@@ -3,7 +3,7 @@ set -x
 #
 # Find out where we are
 #
-cmds=/home/gallard/submodule-workflows/salted-super
+cmds=$(dirname $0)
 echo $cmds
 #
 # Run:
