@@ -1,27 +1,13 @@
 #!/bin/bash
 set -x
 #
-# Housekeeping:
-# Initialize working directory for this demonstration
+# Housekeeping: set up working directory for this test.
 #
-wd=/home/gallard/gw
+here=$(dirname $0)
+. $here/../common/setvars
 #
-# Define the public read/writable area
-#
-public=/public
-#
-# Submodules to create.
-#
-submods="suba subb"
-#
-# Only do one super.
-#
-supers="super"
-#
-# List of clones of super to create.
-# Only one for this exmaple!
-#
-testrepos="testa"
+wd=$home/$user/gw
+umask 002
 #
 # Testrepo:
 # - Clone the supermodu;e

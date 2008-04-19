@@ -1,0 +1,26 @@
+#
+# Setup user and group
+#
+user=gallard
+group=git
+#
+# Location of home directories
+#
+home=/home
+#
+# Location of public read/write area
+#
+public=/public/repos
+#
+# List of submodules to create.
+#
+submods="suba subb"
+#
+# Only do one super.
+#
+supers="super"
+#
+# Test repos for empty supermodule experiment
+#
+testrepos="a b"
+

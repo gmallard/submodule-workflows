@@ -1,11 +1,7 @@
 #!/bin/bash
 set -x
 #
-# Pick up private clone name from command line.
-#
-repo=$1
-wd=/home/gallard/gw
-cd $wd/$repo/super
+umask 002
 #
 # Pull updates from supermodule
 #
@@ -17,3 +13,5 @@ git submodule update
 cd suba
 git checkout master
 git pull
+cd ..
+

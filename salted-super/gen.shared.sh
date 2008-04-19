@@ -3,25 +3,12 @@ set -x
 #
 # Housekeeping: set up working directory for this test.
 #
-wd=/home/gallard/gw
+here=$(dirname $0)
+. $here/../common/setvars
+#
+wd=$home/$user/gw
 rm -rf $wd
 mkdir $wd
-#
-# Location of public read/write area
-#
-public=/public
-#
-# List of submodules to create.
-#
-submods="suba subb"
-#
-# Only do one super.
-#
-supers="super"
-#
-# List of clones of super to create.
-#
-testrepos="testa testb"
 #
 # Submodules:
 # - Create empty repo
@@ -84,28 +71,8 @@ do
 	#
 done
 #
-# Test repositories:
-# - Clone the public supermodule
-# - Initialize each submodule
-# - Checkout the master branch in each submodule
-#
-for d in $testrepos
-do
-	mkdir -p $wd/$d
-	cd $wd/$d
-	git clone file://$public/super.git super
-	cd $wd/$d/super
-	git submodule init
-	git submodule update
-	for sm in $submods
-	do
-		cd $sm
-		git checkout master
-		# A 'pull' is not required because we are initializing for this
-		# demonstration.
-#		git pull
-		cd ..
-	done
-done
+chown -R $user.$group $public/*
+find $public -type d -exec chmod 2775 {} \;
+find $public -type f -exec chmod 664 {} \;
 #
 set +x

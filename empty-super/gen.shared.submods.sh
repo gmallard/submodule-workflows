@@ -1,20 +1,14 @@
 #!/bin/bash
 set -x
 #
-# Housekeeping:
-# Initialize working directory for this demonstration
+# Housekeeping: set up working directory for this test.
 #
-wd=/home/gallard/gw
+here=$(dirname $0)
+. $here/../common/setvars
+#
+wd=$home/$user/gw
 rm -rf $wd
 mkdir $wd
-#
-# Define the public read/writable area
-#
-public=/public
-#
-# List of submodules to create.
-#
-submods="suba subb"
 #
 # Submodules:
 # - Initialize a submodule repository
