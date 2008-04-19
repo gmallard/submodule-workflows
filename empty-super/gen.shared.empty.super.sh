@@ -1,18 +1,12 @@
 #!/bin/bash
 set -x
 #
-# Housekeeping:
-# Initialize working directory for this demonstration
+# Housekeeping: set up working directory for this test.
 #
-wd=/home/gallard/gw
+here=$(dirname $0)
+. $here/../common/setvars
 #
-# Define the public read/writable area
-#
-public=/public
-#
-# Only do one super.
-#
-supers="super"
+wd=$home/$user/gw
 #
 # Supermodule:
 # - Initialize it

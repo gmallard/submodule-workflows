@@ -1,15 +1,12 @@
 #!/bin/bash
 set -x
 #
-# Pick up private clone name from command line.
-#
-repo=$1
-wd=/home/gallard/gw
-cd $wd/$repo/super/suba
+umask 002
 #
 # Do work in a submodule
 #
-echo aline  submod:  $repo >>a.txt
+cd suba
+echo aline  submod:  $repo dir: $(pwd) >>a.txt
 git add .
 git commit -m "Add a line in $repo"
 git pull && git push

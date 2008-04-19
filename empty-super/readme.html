@@ -13,8 +13,8 @@ The Empty Supermodule Examples
 <p>Required components and environment are:</p>
 <ul>
 <li>An installed and working version of git</li>
-<li>A top level direcory named <em>/public</em> that is writable by anyone.  
-To change this name, you must modify the scripts</li>
+<li>A top level direcory named <em>/public/repos</em> that is writable by anyone.  
+To change this name, you must modify the scripts.</li>
 </ul>
 <h1>Instructions</h1>
 <p>Change to the <em>empty-super</em> subdirectory, and run the scripts in the 
@@ -22,11 +22,17 @@ following order:</p>
 <ol>
 <li>./gen.shared.submods.sh</li>
 <li>./gen.shared.empty.super.sh</li>
+<li>./set-perms.sh</li>
 <li>./add.submod.sh</li>
-<li>./get.submods.sh</li>
-<li>./uc-001.sh</li>
+<li>........../uc-001.sh</li>
 </ol>
-<p>The latter script may be executed multiple times.</p>
+<p>The latter script may be executed multiple times from either of the repo direcotries created by
+<em>add.submod.sh</em>.</p>
+<p>Other users may participate by:</p>
+<ol>
+<li>........../get.submods.sh</li>
+<li>........../uc-001.sh</li>
+</ol>
 <h1>Read the Code</h1>
 <p>Well, ......</p>
 <hr />

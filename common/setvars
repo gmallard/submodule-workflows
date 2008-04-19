@@ -19,4 +19,8 @@ submods="suba subb"
 # Only do one super.
 #
 supers="super"
+#
+# Test repos for empty supermodule experiment
+#
+testrepos="a b"
 
