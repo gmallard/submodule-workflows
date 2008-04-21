@@ -43,31 +43,29 @@ The Salted Supermodule Examples
 <p>Required components and environment are:</p>
 <ul>
 <li>An installed and working version of git</li>
-<li>A top level directory named <em>/public/repos</em> that is writable by anyone in the 'git'
-group.
-To change this name, you must modify the scripts</li>
+<li>Successful administrative setup as described in
+<a href="../notes/admin.html" >Administrative Setup</a></li>
 </ul>
 <h1>Instructions</h1>
-<p>Change to the <em>salted-super</em> subdirectory, and run the scripts in the 
-following order:</p>
+<p>Using your own user ID, change to the <em>salted-super</em> subdirectory, and run the first setup script:</p>
 <ol>
 <li>./gen.shared.sh</li>
 </ol>
-<p>From different users, or multiple instances of the same user, arrange to:</p>
+<p>Use multiple terminals, logged in as yourself, or one of the git users created during setup, and:</p>
 <ol>
 <li>Create a private work directory</li>
 <li>CD in to that directory</li>
-<li>Have the scripts in $PATH</li>
+<li>Place the project scripts in your $PATH</li>
 </ol>
-<p>And then in each user or instance, do:</p>
+<p>Using each user instance, do:</p>
 <ol>
 <li>clone-001.sh</li>
 </ol>
-<p>And then:</p>
+<p>Followed by:</p>
 <ol>
 <li>uc-001.sh</li>
 </ol>
-<p>The latter script may be executed multiple times.</p>
+<p>The latter script may be executed multiple times from all user instances.</p>
 <h1>Read the script code</h1>
 <p>Well, ......</p>
 <hr />
