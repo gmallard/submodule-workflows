@@ -20,7 +20,8 @@
 #
 # Setup user and group
 #
-user=gallard
+user=$USER
+gitadmin=gitadmin
 group=git
 #
 # Location of home directories

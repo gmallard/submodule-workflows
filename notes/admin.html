@@ -1,0 +1,113 @@
+<!DOCTYPE html
+PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!--
+
+Copyright (C) 2008 Guy Allard
+
+This file is part of the git Submodules Workflows project.
+
+    The git Submodules Workflows project is free software: you can redistribute it 
+    and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    The git Submodules Workflows project is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with the git Submodules Workflows project.  
+    If not, see <http://www.gnu.org/licenses/>.
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+<meta name="author" content="Guy Allard" />
+<meta name="description" content="git Submodule Admin Setup" />
+<meta name="keywords" content="git, SCM, Submodules" />
+<link rel="stylesheet" type="text/css" href="../common/submodules.css" />
+<title>
+git Submodules Administration Setup
+</title>
+</head>
+<body>
+<h1 style="text-align: center; text-decoration: underline" >git Submodules Administration Setup</h1>
+<br />
+<h1>Background</h1>
+<p>
+Before attempting to run either the salted supermodule or the empty supermodule
+example you must setup the required execution environment.  The tasks to be
+accomplished are:
+<ul>
+<li>Define the user ID that will be used for git administration</li>
+<li>Define a group to be used for repository sharing</li>
+<li>Define two user IDs to be used for the tests</li>
+<li>Attach all required user IDs to the sharing group</li>
+<li>Create a common directory where public repositories will reside</li>
+<li>Set the common directory sharing permissions properly</li>
+</ul>
+</p>
+<p style="color: blue">
+Most of these tasks will require <em>root</em> authority, or at the very least the
+ability to <em>sudo</em> the required commands.
+</p>
+<h1>Sharing Philosophy</h1>
+<p>
+These examples are crafted to run in an environment where the default <em>umask</em>
+value is 0002.
+</p>
+<p>This is the normal case for Redhat style Linux systems.  These examples will
+also run in other Linux environments (e.g. Debian) where that is not the case.
+Code in the examples enforces this behavior.
+</p>
+<p>Requirements for:
+<ul>
+<li>Other *nix systems</li>
+<li>Windows systems</li>
+</ul>
+are unknown.  Good luck!
+</p>
+<h1>Task List</h1>
+<p>Note that you can accomplish these tasks using any of the standard UIs available.
+I show the command line versions here, and assume that you are comfortable with
+basic system administration.</p>
+<p>
+In all cases, you may need to consult your system man pages.
+</p>
+<h2>Define the git Administrative User</h2>
+<pre style="font-weight: bold; text-align: left" >
+adduser gitadmin
+</pre>
+<h2>Define the git Sharing Group</h2>
+<pre style="font-weight: bold; text-align: left" >
+addgroup git
+</pre>
+<h2>Define Test Users</h2>
+<pre style="font-weight: bold; text-align: left" >
+adduser gua
+adduser gub
+</pre>
+<h2>Attach Users to the Sharing Group</h2>
+<pre style="font-weight: bold; text-align: left" >
+usermod -a -G git gitadmin
+usermod -a -G git gua
+usermod -a -G git gub
+usermod -a -G git $USER
+</pre>
+<h2>Create the Public Repository Directory</h2>
+<pre style="font-weight: bold; text-align: left" >
+mkdir -p /public/repos
+</pre>
+<h2>Set the Public Repository Directory Permissions</h2>
+<pre style="font-weight: bold; text-align: left" >
+chown gitadmin.git /public/repos
+chmod 2775 /public/repos
+</pre>
+<hr />
+<p>Back to main page: <a href="../readme.html">Main</a>
+</p>
+</body>
+</html>
+
