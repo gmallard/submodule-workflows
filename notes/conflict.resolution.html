@@ -40,17 +40,17 @@ Merge Conflict Resolution
 <p>
 If you attempt to push, e.g.:
 </p>
-<pre>
+<pre class="bl" >
 git push
 </pre>
 <p>and the result is like:</p>
-<pre>
+<pre class="bl" >
  ! [rejected]        master -> master (non-fast forward)
 error: failed to push some refs to '/home/gallard/subtut/public/super/.git'
 </pre>
 <p>You probably need to pull, and (assuming a successful merge), then push again.
 But note: this pull could yield a merge conflict</p>
-<pre>
+<pre class="bl" >
 git pull
 .
 .
@@ -61,7 +61,7 @@ git push
 If you get merge conflicts when you 'pull and push', and they are normal file conflicts, fix 
 them per normal procedures.  This will look something like:
 </p>
-<pre>
+<pre class="bl" >
 git pull
 remote: Counting objects: 5, done.
 remote: Compressing objects: 100% (2/2)remote: , done.
@@ -75,7 +75,7 @@ Automatic merge failed; fix conflicts and then commit the result.
 </pre>
 <p>Fix per normal git procedures:
 </p>
-<pre>
+<pre class="bl" >
 vi a.txt
 git add a.txt
 git commit
@@ -85,7 +85,7 @@ git commit
 If you are in a super-module, and get conflict error messages during a
 'pull and push' like:
 </p>
-<pre>
+<pre class="bl" >
 git pull
 remote: Counting objects: 4, done.
 remote: Compressing objects: 100% (3/3), done.
@@ -99,12 +99,15 @@ CONFLICT (submodule): Merge conflict in a - needs 7d60be49cea14ce00dba02db768850
 <p>
 you should run a:
 </p>
-<pre>
+<pre class="bl" >
 git submodule update
 git add a
 git commit -m "Update submod for merge conflict"
 #  And then remember the push
 git push
 </pre>
+<hr />
+<p>Back to main page: <a href="../readme.html">Main</a>
+</p>
 </body>
 </html>

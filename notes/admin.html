@@ -77,31 +77,31 @@ basic system administration.</p>
 In all cases, you may need to consult your system man pages.
 </p>
 <h2>Define the git Administrative User</h2>
-<pre style="font-weight: bold; text-align: left" >
+<pre class="bl" >
 adduser gitadmin
 </pre>
 <h2>Define the git Sharing Group</h2>
-<pre style="font-weight: bold; text-align: left" >
+<pre class="bl" >
 addgroup git
 </pre>
 <h2>Define Test Users</h2>
-<pre style="font-weight: bold; text-align: left" >
+<pre class="bl" >
 adduser gua
 adduser gub
 </pre>
 <h2>Attach Users to the Sharing Group</h2>
-<pre style="font-weight: bold; text-align: left" >
+<pre class="bl" >
 usermod -a -G git gitadmin
 usermod -a -G git gua
 usermod -a -G git gub
 usermod -a -G git $USER
 </pre>
 <h2>Create the Public Repository Directory</h2>
-<pre style="font-weight: bold; text-align: left" >
+<pre class="bl" >
 mkdir -p /public/repos
 </pre>
 <h2>Set the Public Repository Directory Permissions</h2>
-<pre style="font-weight: bold; text-align: left" >
+<pre class="bl" >
 chown gitadmin.git /public/repos
 chmod 2775 /public/repos
 </pre>

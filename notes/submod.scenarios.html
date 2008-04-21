@@ -40,17 +40,22 @@ Submodule Workflow Scenarios
 <h1>Scenario 1</h1>
 <h2>General Description</h2>
 <p>
-TBD
+This scenario shows typical workflows between two users, where the workflows are
+such that:
 </p>
+<ol>
+<li>There are no merge conflicts</li>
+<li>There are no timing overlaps which might cause changes in standard workflows</li>
+</ol>
 <h2>Timeline</h2>
-<pre>
-UserA:S---1---2----------------------------------------------------------------------
+<pre class="bl" >
+UserA: S---1---2----------------------------------------------------------------------
 
-UserB:S--------------3---4-----------------------------------------------------------
+UserB: S--------------3---4-----------------------------------------------------------
 </pre>
 <h2>Details</h2>
 <h3>Commit/Push  1 - UserA - Submodule</h3>
-<pre>
+<pre class="bl" >
 cd supa.cloned.one
 cd suba
 echo a >a.txt
@@ -61,7 +66,7 @@ git push
 #
 </pre>
 <h3>Commit/Push 2 - UserA - Supermodule</h3>
-<pre>
+<pre class="bl" >
 cd ..
 git status
 git commit -a -m "Update suba with a.txt"
@@ -69,7 +74,7 @@ git pull
 git push
 </pre>
 <h3>Commit/Push  3 - UserB - Submodule</h3>
-<pre>
+<pre class="bl" >
 # Prep
 cd supa.cloned.two
 git pull
@@ -87,7 +92,7 @@ git push
 #
 </pre>
 <h3>Commit/Push  4 - UserB - Supermodule</h3>
-<pre>
+<pre class="bl" >
 cd ..
 git status
 git commit -a -m "Update suba with b.txt"
@@ -99,13 +104,35 @@ git push
 <h1>Scenario 2</h1>
 <h2>General Description</h2>
 <p>
-TBD
+This scenario shows typical workflows between two users, where the workflows are
+such that:
+</p>
+<ol>
+<li>There are no merge conflicts</li>
+<li>There are some timing overlaps which might cause changes in standard workflows</li>
+</ol>
 </p>
 <h2>Timeline</h2>
-<pre>
-S---1----------3---------------------------------------------------------------
+<pre class="bl" >
+UserA: S---1----------3---------------------------------------------------------------
 
-S---------2---------4----------------------------------------------------------
+UserB: S---------2---------4----------------------------------------------------------
+</pre>
+<h3>Commit/Push  1 - UserA - Submodule</h3>
+<pre class="bl" >
+TBD
+</pre>
+<h3>Commit/Push  2 - UserB - Submodule</h3>
+<pre class="bl" >
+TBD
+</pre>
+<h3>Commit/Push  3 - UserA - Supermodule</h3>
+<pre class="bl" >
+TBD
+</pre>
+<h3>Commit/Push  4 - UserB - Supermodule</h3>
+<pre class="bl" >
+TBD
 </pre>
 <h1>Scenario 3</h1>
 <h2>General Description</h2>
@@ -113,10 +140,26 @@ S---------2---------4----------------------------------------------------------
 TBD
 </p>
 <h2>Timeline</h2>
-<pre>
-S---1---------------4----------------------------------------------------------
+<pre class="bl" >
+UserA: S---1---------------4----------------------------------------------------------
 
-S---------2---3----------------------------------------------------------------
+UserB: S---------2---3----------------------------------------------------------------
+</pre>
+<h3>Commit/Push  1 - UserA - Submodule</h3>
+<pre class="bl" >
+TBD
+</pre>
+<h3>Commit/Push  2 - UserB - Submodule</h3>
+<pre class="bl" >
+TBD
+</pre>
+<h3>Commit/Push  3 - UserB - Supermodule</h3>
+<pre class="bl" >
+TBD
+</pre>
+<h3>Commit/Push  4 - UserA - Supermodule</h3>
+<pre class="bl" >
+TBD
 </pre>
 </body>
 

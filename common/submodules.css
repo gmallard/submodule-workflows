@@ -60,3 +60,9 @@ color:black
 a:active {
 color:blue
 }
+/*                 */
+pre.bl {
+font-weight: bold;
+text-align: left
+}
+
