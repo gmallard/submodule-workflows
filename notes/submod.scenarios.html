@@ -2,6 +2,9 @@
 PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" 
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <!--
+
+Copyright (C) 2008 Guy Allard
+
 This file is part of the git Submodules Workflows project.
 
     The git Submodules Workflows project is free software: you can redistribute it 
@@ -10,7 +13,7 @@ This file is part of the git Submodules Workflows project.
     the Free Software Foundation, either version 3 of the License, or
     (at your option) any later version.
 
-    Foobar is distributed in the hope that it will be useful,
+    The git Submodules Workflows project is distributed in the hope that it will be useful,
     but WITHOUT ANY WARRANTY; without even the implied warranty of
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
@@ -26,28 +29,28 @@ This file is part of the git Submodules Workflows project.
 <meta name="keywords" content="git, SCM, Submodules" />
 <link rel="stylesheet" type="text/css" href="../common/submodules.css" />
 <title>
-Miscellaneous Notes
+Submodule Scenarios
 </title>
 </head>
 <body>
-<pre>
-=======
-Scenario 1
-
-General Description:
-
+<h1 style="text-align: center; text-decoration: underline" >
+Submodule Workflow Scenarios
+</h1>
+<br />
+<h1>Scenario 1</h1>
+<h2>General Description</h2>
+<p>
 TBD
+</p>
+<h2>Timeline</h2>
+<pre>
+UserA:S---1---2----------------------------------------------------------------------
 
-Timeline:
-
-S---1---2----------------------------------------------------------------------
-
-S--------------3---4-----------------------------------------------------------
-
-Details:
-
-Commit/Push  1:
-
+UserB:S--------------3---4-----------------------------------------------------------
+</pre>
+<h2>Details</h2>
+<h3>Commit/Push  1 - UserA - Submodule</h3>
+<pre>
 cd supa.cloned.one
 cd suba
 echo a >a.txt
@@ -56,17 +59,17 @@ git commit -m "Add file a.txt"
 git pull
 git push
 #
-
-Commit/Push  2:
-
+</pre>
+<h3>Commit/Push 2 - UserA - Supermodule</h3>
+<pre>
 cd ..
 git status
 git commit -a -m "Update suba with a.txt"
 git pull
 git push
-
-Commit/Push  3:
-
+</pre>
+<h3>Commit/Push  3 - UserB - Submodule</h3>
+<pre>
 # Prep
 cd supa.cloned.two
 git pull
@@ -82,9 +85,9 @@ git commit -m "Add file b.txt"
 git pull
 git push
 #
-
-Commit/Push  4:
-
+</pre>
+<h3>Commit/Push  4 - UserB - Supermodule</h3>
+<pre>
 cd ..
 git status
 git commit -a -m "Update suba with b.txt"
@@ -92,32 +95,28 @@ git pull
 git push
 
 # But now supa.cloned.one needs to pull + update + checkout + pull
-
-
-=======
-Scenario 2
-
-General Description:
-
+</pre>
+<h1>Scenario 2</h1>
+<h2>General Description</h2>
+<p>
 TBD
-
-Timeline:
-
+</p>
+<h2>Timeline</h2>
+<pre>
 S---1----------3---------------------------------------------------------------
 
 S---------2---------4----------------------------------------------------------
-
-=======
-Scenario 3
-
-General Description:
-
+</pre>
+<h1>Scenario 3</h1>
+<h2>General Description</h2>
+<p>
 TBD
-
-Timeline:
-
+</p>
+<h2>Timeline</h2>
+<pre>
 S---1---------------4----------------------------------------------------------
 
 S---------2---3----------------------------------------------------------------
 </pre>
 </body>
+
