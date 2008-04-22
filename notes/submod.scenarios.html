@@ -86,24 +86,28 @@ git push
 </pre>
 Typical results:
 <pre class="bl" >
-gua@oldpete:~$ cd super/
-gua@oldpete:~/super$ cd suba
-gua@oldpete:~/super/suba$ echo a >>a.txt
-gua@oldpete:~/super/suba$ git add a.txt
-gua@oldpete:~/super/suba$ git commit -m "Add a.txt"
-Created commit abd634e: Add a.txt
+gua@oldpete:~$ sc1.cp1a.ua.sh 
++ umask 002
++ cd
++ cd super
++ cd suba
++ echo a
++ git add a.txt
++ git commit -m 'Add a.txt'
+Created commit 352fc42: Add a.txt
  1 files changed, 1 insertions(+), 0 deletions(-)
  create mode 100644 a.txt
-gua@oldpete:~/super/suba$ git pull
++ git pull
 Already up-to-date.
-gua@oldpete:~/super/suba$ git push
++ git push
 Counting objects: 4, done.
 Compressing objects: 100% (2/2), done.
 Unpacking objects: 100% (3/3), done.
-Writing objects: 100% (3/3), 273 bytes, done.
+Writing objects: 100% (3/3), 275 bytes, done.
 Total 3 (delta 0), reused 0 (delta 0)
 To file:///public/repos/suba.git
-   6747564..abd634e  master -> master
+   09dae39..352fc42  master -> master
++ set +x
 </pre>
 <h3>Commit/Push 2 - User:gua - Supermodule</h3>
 Typical Command Sequence:
@@ -119,8 +123,11 @@ git push
 </pre>
 Typical Results:
 <pre class="bl" >
-gua@oldpete:~/super/suba$ cd ..
-gua@oldpete:~/super$ git status
+gua@oldpete:~$ sc1.cp2a.ua.sh 
++ umask 002
++ cd
++ cd super
++ git status
 # On branch master
 # Changed but not updated:
 #   (use "git add <file>..." to update what will be committed)
@@ -128,24 +135,25 @@ gua@oldpete:~/super$ git status
 #       modified:   suba
 #
 no changes added to commit (use "git add" and/or "git commit -a")
-gua@oldpete:~/super$ git commit -a -m "Update suba with a.txt"
-Created commit eeb6734: Update suba with a.txt
++ git commit -a -m 'Update suba with a.txt'
+Created commit 6eb0027: Update suba with a.txt
  1 files changed, 1 insertions(+), 1 deletions(-)
-gua@oldpete:~/super$ git pull
++ git pull
 Already up-to-date.
-gua@oldpete:~/super$ git push
++ git push
 Counting objects: 3, done.
 Compressing objects: 100% (2/2), done.
 Writing objects: 100% (2/2), 257 bytes, done.
 Total 2 (delta 1), reused 0 (delta 0)
 Unpacking objects: 100% (2/2), done.
 To /public/repos/super.git
-   98a0f9a..eeb6734  master -> master
+   df3cbea..6eb0027  master -> master
++ set +x
 </pre>
 <h3>Commit/Push  3 - User:gub - Submodule</h3>
 Typical Command Sequence:
 <pre class="bl" >
-<!-- See: sc1.cp2a.ub.sh -->
+<!-- See: sc1.cp3a.ub.sh -->
 umask 002
 # Prep
 cd super
@@ -163,54 +171,55 @@ git push
 </pre>
 Typical Results:
 <pre class="bl" >
-gub@oldpete:~$ # Prep
-gub@oldpete:~$ cd super
-gub@oldpete:~/super$ git pull
+gub@oldpete:~$ sc1.cp3a.ub.sh 
++ umask 002
++ cd super
++ git pull
 remote: Counting objects: 3, done.
 remote: Compressing objects: 100% (2/2)remote: , done.
 remote: Total 2 (delta 1), reused 0 (delta 0)
 Unpacking objects: 100% (2/2), done.
 From /public/repos/super
-   98a0f9a..eeb6734  master     -> origin/master
-Updating 98a0f9a..eeb6734
+   df3cbea..6eb0027  master     -> origin/master
+Updating df3cbea..6eb0027
 Fast forward
  suba |    2 +-
  1 files changed, 1 insertions(+), 1 deletions(-)
-gub@oldpete:~/super$ git submodule update
++ git submodule update
 remote: Counting objects: 4, done.
 remote: Compressing objects: 100% (2/2)remote: , done.
 remote: Total 3 (delta 0), reused 0 (delta 0)
 Unpacking objects: 100% (3/3), done.
 From file:///public/repos/suba
-   6747564..abd634e  master     -> origin/master
-Submodule path 'suba': checked out 'abd634e1045c9ac46908967d08b8f5f0ee619598'
-gub@oldpete:~/super$ cd suba
-gub@oldpete:~/super/suba$ git checkout master
-Previous HEAD position was abd634e... Add a.txt
+   09dae39..352fc42  master     -> origin/master
+Submodule path 'suba': checked out '352fc420dd7718e63eb9d69230999f680abfe46c'
++ cd suba
++ git checkout master
+Previous HEAD position was 352fc42... Add a.txt
 Switched to branch "master"
-gub@oldpete:~/super/suba$ git pull
-Updating 6747564..abd634e
++ git pull
+Updating 09dae39..352fc42
 Fast forward
  a.txt |    1 +
  1 files changed, 1 insertions(+), 0 deletions(-)
  create mode 100644 a.txt
-gub@oldpete:~/super/suba$ # add work
-gub@oldpete:~/super/suba$ echo b >b.txt
-gub@oldpete:~/super/suba$ git add .
-gub@oldpete:~/super/suba$ git commit -m "Add file b.txt"
-Created commit 69fa4fb: Add file b.txt
++ echo b
++ git add .
++ git commit -m 'Add file b.txt'
+Created commit 4a549d5: Add file b.txt
  1 files changed, 1 insertions(+), 0 deletions(-)
  create mode 100644 b.txt
-gub@oldpete:~/super/suba$ git pull
++ git pull
 Already up-to-date.
-gub@oldpete:~/super/suba$ git push
++ git push
 Counting objects: 4, done.
 Compressing objects: 100% (2/2), done.
-Unpacking objects: 100% (3/3), done.
-Writing objects: 100% (3/3), 305 bytes, done.
+Writing objects: 100% (3/3), 304 bytes, done.
 Total 3 (delta 0), reused 0 (delta 0)
+Unpacking objects: 100% (3/3), done.
 To file:///public/repos/suba.git
-   abd634e..69fa4fb  master -> master
+   352fc42..4a549d5  master -> master
++ set +x
 </pre>
 <h3>Commit/Push  4 - User:gub - Supermodule</h3>
 Typical Command Sequence:
@@ -226,8 +235,11 @@ git push
 </pre>
 Typical Results:
 <pre class="bl" >
-gub@oldpete:~/super/suba$ cd ..
-gub@oldpete:~/super$ git status
+gub@oldpete:~$ sc1.cp4a.ub.sh 
++ umask 002
++ cd
++ cd super
++ git status
 # On branch master
 # Changed but not updated:
 #   (use "git add <file>..." to update what will be committed)
@@ -235,19 +247,20 @@ gub@oldpete:~/super$ git status
 #       modified:   suba
 #
 no changes added to commit (use "git add" and/or "git commit -a")
-gub@oldpete:~/super$ git commit -a -m "Update suba with b.txt"
-Created commit 6f9a6af: Update suba with b.txt
++ git commit -a -m 'Update suba with b.txt'
+Created commit a3efc93: Update suba with b.txt
  1 files changed, 1 insertions(+), 1 deletions(-)
-gub@oldpete:~/super$ git pull
++ git pull
 Already up-to-date.
-gub@oldpete:~/super$ git push
++ git push
 Counting objects: 3, done.
 Compressing objects: 100% (2/2), done.
-Writing objects: 100% (2/2), 255 bytes, done.
+Writing objects: 100% (2/2), 257 bytes, done.
 Total 2 (delta 1), reused 0 (delta 0)
 Unpacking objects: 100% (2/2), done.
 To /public/repos/super.git
-   eeb6734..6f9a6af  master -> master
+   6eb0027..a3efc93  master -> master
++ set +x
 </pre>
 <!-- ///////////////////////////////////////////////////////// -->
 <hr />
@@ -286,31 +299,36 @@ git push
 </pre>
 Typical Results:
 <pre class="bl" >
-gua@oldpete:~/super$ cd suba
-gua@oldpete:~/super/suba$ echo a >>a.txt 
-gua@oldpete:~/super/suba$ git add a.txt
-gua@oldpete:~/super/suba$ git commit -m "Modify a.txt"
-Created commit ef186ba: Modify a.txt
+gua@oldpete:~$ sc2.cp1a.ua.sh 
++ umask 002
++ cd
++ cd super
++ cd suba
++ echo a
++ git add a.txt
++ git commit -m 'Modify a.txt'
+Created commit 695364f: Modify a.txt
  1 files changed, 1 insertions(+), 0 deletions(-)
-gua@oldpete:~/super/suba$ git pull
++ git pull
 remote: Counting objects: 4, done.
 remote: Compressing objects: 100% (2/2)remote: , done.
 remote: Total 3 (delta 0), reused 0 (delta 0)
 Unpacking objects: 100% (3/3), done.
 From file:///public/repos/suba
-   abd634e..69fa4fb  master     -> origin/master
+   352fc42..4a549d5  master     -> origin/master
 Merge made by recursive.
  b.txt |    1 +
  1 files changed, 1 insertions(+), 0 deletions(-)
  create mode 100644 b.txt
-gua@oldpete:~/super/suba$ git push
++ git push
 Counting objects: 8, done.
 Compressing objects: 100% (4/4), done.
-Unpacking objects: 100% (5/5), done.
-Writing objects: 100% (5/5), 551 bytes, done.
+Writing objects: 100% (5/5), 554 bytes, done.
 Total 5 (delta 1), reused 0 (delta 0)
+Unpacking objects: 100% (5/5), done.
 To file:///public/repos/suba.git
-   69fa4fb..d90fad7  master -> master
+   4a549d5..d252970  master -> master
++ set +x
 </pre>
 <h3>Commit/Push  2 - User:gub - Submodule</h3>
 Typical Command Sequence:
@@ -328,30 +346,35 @@ git push
 </pre>
 Typical Results:
 <pre class="bl" >
-gub@oldpete:~/super$ cd suba
-gub@oldpete:~/super/suba$ echo bb >>b.txt 
-gub@oldpete:~/super/suba$ git add .
-gub@oldpete:~/super/suba$ git commit -m "Modify b.txt"
-Created commit b593ae1: Modify b.txt
+gub@oldpete:~$ sc2.cp2a.ub.sh 
++ umask 002
++ cd
++ cd super
++ cd suba
++ echo bb
++ git add .
++ git commit -m 'Modify b.txt'
+Created commit a8a0b29: Modify b.txt
  1 files changed, 1 insertions(+), 0 deletions(-)
-gub@oldpete:~/super/suba$ git pull
++ git pull
 remote: Counting objects: 8, done.
 remote: Compressing objects: 100% (4/4), done.
 remote: Total 5 (delta 1), reused 0 (delta 0)
 Unpacking objects: 100% (5/5), done.
 From file:///public/repos/suba
-   69fa4fb..d90fad7  master     -> origin/master
+   4a549d5..d252970  master     -> origin/master
 Merge made by recursive.
  a.txt |    1 +
  1 files changed, 1 insertions(+), 0 deletions(-)
-gub@oldpete:~/super/suba$ git push
++ git push
 Counting objects: 8, done.
 Compressing objects: 100% (4/4), done.
-Writing objects: 100% (5/5), 531 bytes, done.
+Writing objects: 100% (5/5), 530 bytes, done.
 Total 5 (delta 2), reused 0 (delta 0)
 Unpacking objects: 100% (5/5), done.
 To file:///public/repos/suba.git
-   d90fad7..5f908f9  master -> master
+   d252970..923a0dd  master -> master
++ set +x
 </pre>
 <h3>Commit/Push  3 - User:gua - Supermodule</h3>
 Typical Command Sequence:
@@ -367,8 +390,11 @@ git pull
 </pre>
 Typical Results:
 <pre class="bl" >
-gua@oldpete:~/super/suba$ cd ..
-gua@oldpete:~/super$ git status
+gua@oldpete:~$ sc2.cp3a.ua.sh 
++ umask 002
++ cd
++ cd super
++ git status
 # On branch master
 # Changed but not updated:
 #   (use "git add <file>..." to update what will be committed)
@@ -376,20 +402,22 @@ gua@oldpete:~/super$ git status
 #       modified:   suba
 #
 no changes added to commit (use "git add" and/or "git commit -a")
-gua@oldpete:~/super$ git add .
-gua@oldpete:~/super$ git commit -m "Update submodule suba from $(pwd)"
-Created commit a9d2370: Update submodule suba from /home/gua/super
++ git add .
+++ pwd
++ git commit -m 'Update submodule suba from /home/gua/super'
+Created commit 4d52274: Update submodule suba from /home/gua/super
  1 files changed, 1 insertions(+), 1 deletions(-)
-gua@oldpete:~/super$ git pull
++ git pull
 remote: Counting objects: 3, done.
 remote: Compressing objects: 100% (2/2)remote: , done.
 remote: Total 2 (delta 1), reused 0 (delta 0)
 Unpacking objects: 100% (2/2), done.
 From /public/repos/super
-   eeb6734..6f9a6af  master     -> origin/master
+   6eb0027..a3efc93  master     -> origin/master
 Auto-merged suba
-CONFLICT (submodule): Merge conflict in suba - needs 69fa4fb77edec0fe013f7fb8d442d260258bf8de
+CONFLICT (submodule): Merge conflict in suba - needs 4a549d5b12951dc3f8cf7e844da1dcf142e2b9f0
 Automatic merge failed; fix conflicts and then commit the result.
++ set +x
 </pre>
 <p>Well, well.  A merge conflict.  Does the <a href="./conflict.resolution.html" >
 Conflict Resolution</a> page help?  It seems to. We continue:
@@ -407,27 +435,33 @@ git push
 </pre>
 Recovery Results:
 <pre class="bl" >
-gua@oldpete:~/super$ git submodule update
+gua@oldpete:~$ sc2.cp3b.ua.sh 
++ umask 002
++ cd
++ cd super
++ git submodule update
 remote: Counting objects: 8, done.
 remote: Compressing objects: 100% (4/4), done.
 remote: Total 5 (delta 2), reused 0 (delta 0)
 Unpacking objects: 100% (5/5), done.
 From file:///public/repos/suba
-   d90fad7..5f908f9  master     -> origin/master
-Submodule path 'suba': checked out 'abd634e1045c9ac46908967d08b8f5f0ee619598'
-Submodule path 'suba': checked out 'd90fad707b7fb38cb9093528bc81351197b675c8'
-Submodule path 'suba': checked out '69fa4fb77edec0fe013f7fb8d442d260258bf8de'
-gua@oldpete:~/super$ git add suba
-gua@oldpete:~/super$ git commit -m "Update submodule suba from $(pwd), after conflict"
-Created commit 7853814: Update submodule suba from /home/gua/super, after conflict
-gua@oldpete:~/super$ git push
+   d252970..923a0dd  master     -> origin/master
+Submodule path 'suba': checked out '352fc420dd7718e63eb9d69230999f680abfe46c'
+Submodule path 'suba': checked out 'd252970ac9512365b48ab4e8fb1190e5d1fbc047'
+Submodule path 'suba': checked out '4a549d5b12951dc3f8cf7e844da1dcf142e2b9f0'
++ git add suba
+++ pwd
++ git commit -m 'Update submodule suba from /home/gua/super, after conflict'
+Created commit 01f4452: Update submodule suba from /home/gua/super, after conflict
++ git push
 Counting objects: 5, done.
 Compressing objects: 100% (3/3), done.
-Unpacking objects: 100% (3/3), done.
-Writing objects: 100% (3/3), 485 bytes, done.
+Writing objects: 100% (3/3), 488 bytes, done.
 Total 3 (delta 1), reused 0 (delta 0)
+Unpacking objects: 100% (3/3), done.
 To /public/repos/super.git
-   6f9a6af..7853814  master -> master
+   a3efc93..01f4452  master -> master
++ set +x
 </pre>
 <h3>Commit/Push  4 - User:gub - Supermodule</h3>
 Typical Command Sequence:
@@ -444,8 +478,11 @@ git push
 </pre>
 Typical Results:
 <pre class="bl" >
-gub@oldpete:~/super/suba$ cd ..
-gub@oldpete:~/super$ git status
+gub@oldpete:~$ sc2.cp4a.ub.sh 
++ umask 002
++ cd
++ cd super
++ git status
 # On branch master
 # Changed but not updated:
 #   (use "git add <file>..." to update what will be committed)
@@ -453,27 +490,29 @@ gub@oldpete:~/super$ git status
 #       modified:   suba
 #
 no changes added to commit (use "git add" and/or "git commit -a")
-gub@oldpete:~/super$ git add suba
-gub@oldpete:~/super$ git commit -m "Update suba from $(pwd)"
-Created commit cf228d8: Update suba from /home/gub/super
++ git add suba
+++ pwd
++ git commit -m 'Update suba from /home/gub/super'
+Created commit 9120c94: Update suba from /home/gub/super
  1 files changed, 1 insertions(+), 1 deletions(-)
-gub@oldpete:~/super$ git pull
++ git pull
 remote: Counting objects: 5, done.
 remote: Compressing objects: 100% (3/3), done.
 remote: Total 3 (delta 1), reused 0 (delta 0)
 Unpacking objects: 100% (3/3), done.
 From /public/repos/super
-   b89678c..295d39b  master     -> origin/master
+   a3efc93..01f4452  master     -> origin/master
 Already uptodate!
 Merge made by recursive.
-gub@oldpete:~/super$ git push
++ git push
 Counting objects: 4, done.
 Compressing objects: 100% (3/3), done.
-Unpacking objects: 100% (3/3), done.
-Writing objects: 100% (3/3), 415 bytes, done.
+Writing objects: 100% (3/3), 416 bytes, done.
 Total 3 (delta 2), reused 0 (delta 0)
+Unpacking objects: 100% (3/3), done.
 To /public/repos/super.git
-   295d39b..412b5d9  master -> master
+   01f4452..01013d1  master -> master
++ set +x
 </pre>
 <!-- ///////////////////////////////////////////////////////// -->
 <hr />
@@ -513,27 +552,32 @@ git push
 </pre>
 Typical Results:
 <pre class="bl" >
-gua@oldpete:~/super$ cd suba
-gua@oldpete:~/super/suba$ git checkout master
-Previous HEAD position was 32f9c25... Modify a.txt
+gua@oldpete:~$ sc3.cp1a.ua.sh 
++ umask 002
++ cd
++ cd super
++ cd suba
++ git checkout master
+Previous HEAD position was 4a549d5... Add file b.txt
 Switched to branch "master"
-gua@oldpete:~/super/suba$ echo a >>a.txt
-gua@oldpete:~/super/suba$ git add a.txt
-gua@oldpete:~/super/suba$ git commit -m "Modify a.txt"
-Created commit 8a45ed6: Modify a.txt
++ echo a
++ git add a.txt
++ git commit -m 'Modify a.txt'
+Created commit 6921d7a: Modify a.txt
  1 files changed, 1 insertions(+), 0 deletions(-)
-gua@oldpete:~/super/suba$ git pull
++ git pull
 Merge made by recursive.
  b.txt |    1 +
  1 files changed, 1 insertions(+), 0 deletions(-)
-gua@oldpete:~/super/suba$ git push
++ git push
 Counting objects: 8, done.
 Compressing objects: 100% (4/4), done.
 Writing objects: 100% (5/5), 578 bytes, done.
 Total 5 (delta 1), reused 0 (delta 0)
 Unpacking objects: 100% (5/5), done.
 To file:///public/repos/suba.git
-   96f57f0..8cebe00  master -> master
+   923a0dd..bd4ab57  master -> master
++ set +x
 </pre>
 <h3>Commit/Push  2 - User:gub - Submodule</h3>
 Typical Command Sequence:
@@ -552,32 +596,37 @@ git push
 </pre>
 Typical Results:
 <pre class="bl" >
-gub@oldpete:~/super$ cd suba
-gub@oldpete:~/super/suba$ git checkout master
+gub@oldpete:~$ sc3.cp2a.ub.sh 
++ umask 007
++ cd
++ cd super
++ cd suba
++ git checkout master
 Already on branch "master"
-gub@oldpete:~/super/suba$ echo bb >>b.txt
-gub@oldpete:~/super/suba$ git add b.txt
-gub@oldpete:~/super/suba$ git commit -m "Modify b.txt"
-Created commit 053064e: Modify b.txt
++ echo bb
++ git add b.txt
++ git commit -m 'Modify b.txt'
+Created commit 2a306a6: Modify b.txt
  1 files changed, 1 insertions(+), 0 deletions(-)
-gub@oldpete:~/super/suba$ git pull
++ git pull
 remote: Counting objects: 8, done.
 remote: Compressing objects: 100% (4/4), done.
 remote: Total 5 (delta 1), reused 0 (delta 0)
 Unpacking objects: 100% (5/5), done.
 From file:///public/repos/suba
-   96f57f0..8cebe00  master     -> origin/master
+   923a0dd..bd4ab57  master     -> origin/master
 Merge made by recursive.
  a.txt |    1 +
  1 files changed, 1 insertions(+), 0 deletions(-)
-gub@oldpete:~/super/suba$ git push
++ git push
 Counting objects: 8, done.
 Compressing objects: 100% (4/4), done.
-Writing objects: 100% (5/5), 528 bytes, done.
+Writing objects: 100% (5/5), 529 bytes, done.
 Total 5 (delta 2), reused 0 (delta 0)
 Unpacking objects: 100% (5/5), done.
 To file:///public/repos/suba.git
-   8cebe00..0544036  master -> master
+   bd4ab57..ef0e01d  master -> master
++ set +x
 </pre>
 <h3>Commit/Push  3 - User:gub - Supermodule</h3>
 Typical Command Sequence:
@@ -594,8 +643,11 @@ git push
 </pre>
 Typical Results:
 <pre class="bl" >
-gub@oldpete:~/super/suba$ cd ..
-gub@oldpete:~/super$ git status
+gub@oldpete:~$ sc3.cp3a.ub.sh 
++ umask 002
++ cd
++ cd super
++ git status
 # On branch master
 # Changed but not updated:
 #   (use "git add <file>..." to update what will be committed)
@@ -603,20 +655,22 @@ gub@oldpete:~/super$ git status
 #       modified:   suba
 #
 no changes added to commit (use "git add" and/or "git commit -a")
-gub@oldpete:~/super$ git add .
-gub@oldpete:~/super$ git commit -m "Update submodules from $(pwd)"
-Created commit c254dac: Update submodules from /home/gub/super
++ git add .
+++ pwd
++ git commit -m 'Update submodules from /home/gub/super'
+Created commit 2d0b756: Update submodules from /home/gub/super
  1 files changed, 1 insertions(+), 1 deletions(-)
-gub@oldpete:~/super$ git pull
++ git pull
 Already up-to-date.
-gub@oldpete:~/super$ git push
++ git push
 Counting objects: 3, done.
 Compressing objects: 100% (2/2), done.
 Writing objects: 100% (2/2), 269 bytes, done.
 Total 2 (delta 1), reused 0 (delta 0)
 Unpacking objects: 100% (2/2), done.
 To /public/repos/super.git
-   412b5d9..c254dac  master -> master
+   01013d1..2d0b756  master -> master
++ set +x
 </pre>
 <h3>Commit/Push  4 - User:gua - Supermodule</h3>
 Typical Command Sequence:
@@ -632,8 +686,11 @@ git pull
 </pre>
 Typical Results:
 <pre class="bl" >
-gua@oldpete:~/super/suba$ cd ..
-gua@oldpete:~/super$ git status
+gua@oldpete:~$ sc3.cp4a.ua.sh 
++ umask 002
++ cd
++ cd super
++ git status
 # On branch master
 # Changed but not updated:
 #   (use "git add <file>..." to update what will be committed)
@@ -641,20 +698,22 @@ gua@oldpete:~/super$ git status
 #       modified:   suba
 #
 no changes added to commit (use "git add" and/or "git commit -a")
-gua@oldpete:~/super$ git add .
-gua@oldpete:~/super$ git commit -m "Update submodules from $(pwd)"
-Created commit b443aba: Update submodules from /home/gua/super
++ git add .
+++ pwd
++ git commit -m 'Update submodules from /home/gua/super'
+Created commit f4aa5e7: Update submodules from /home/gua/super
  1 files changed, 1 insertions(+), 1 deletions(-)
-gua@oldpete:~/super$ git pull
++ git pull
 remote: Counting objects: 6, done.
 remote: Compressing objects: 100% (5/5), done.
 remote: Total 5 (delta remote: 3), reused 0 (delta 0)
 Unpacking objects: 100% (5/5), done.
 From /public/repos/super
-   295d39b..c254dac  master     -> origin/master
+   01f4452..2d0b756  master     -> origin/master
 Auto-merged suba
-CONFLICT (submodule): Merge conflict in suba - needs 0544036f9d9683c653c32a412c71e547af63348d
+CONFLICT (submodule): Merge conflict in suba - needs ef0e01d4288ec0195e55d06467fc18004b7c7682
 Automatic merge failed; fix conflicts and then commit the result.
++ set +x
 </pre>
 <p>Another submodule merge conflict.  Fix this as before.</p>
 </p>
@@ -672,27 +731,33 @@ git push
 </pre>
 Recovery Results:
 <pre class="bl" >
-gua@oldpete:~/super$ git submodule update
+gua@oldpete:~$ sc3.cp4b.ua.sh 
++ umask 002
++ cd
++ cd super
++ git submodule update
 remote: Counting objects: 8, done.
 remote: Compressing objects: 100% (4/4), done.
 remote: Total 5 (delta 2), reused 0 (delta 0)
 Unpacking objects: 100% (5/5), done.
 From file:///public/repos/suba
-   8cebe00..0544036  master     -> origin/master
-Submodule path 'suba': checked out '6aee68430a2164866ae0de5c13f623a3852c017a'
-Submodule path 'suba': checked out '8cebe00e2dcdcaa856c3eeae7069b2275a89df08'
-Submodule path 'suba': checked out '0544036f9d9683c653c32a412c71e547af63348d'
-gua@oldpete:~/super$ git add suba
-gua@oldpete:~/super$ git commit -m "Update submodule suba from $(pwd), after conflict"
-Created commit 7efd1f1: Update submodule suba from /home/gua/super, after conflict
-gua@oldpete:~/super$ git push
+   bd4ab57..ef0e01d  master     -> origin/master
+Submodule path 'suba': checked out '4a549d5b12951dc3f8cf7e844da1dcf142e2b9f0'
+Submodule path 'suba': checked out 'bd4ab573d737241c5ad1d0ab2758a77b6465ddff'
+Submodule path 'suba': checked out 'ef0e01d4288ec0195e55d06467fc18004b7c7682'
++ git add suba
+++ pwd
++ git commit -m 'Update submodule suba from /home/gua/super, after conflict'
+Created commit 1a233b1: Update submodule suba from /home/gua/super, after conflict
++ git push
 Counting objects: 5, done.
 Compressing objects: 100% (3/3), done.
-Unpacking objects: 100% (3/3), done.
-Writing objects: 100% (3/3), 483 bytes, done.
+Writing objects: 100% (3/3), 482 bytes, done.
 Total 3 (delta 1), reused 0 (delta 0)
+Unpacking objects: 100% (3/3), done.
 To /public/repos/super.git
-   c254dac..7efd1f1  master -> master
+   2d0b756..1a233b1  master -> master
++ set +x
 </pre>
 <hr />
 <p>Back to main page: <a href="../readme.html">Main</a>
