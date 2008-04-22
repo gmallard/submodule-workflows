@@ -26,6 +26,7 @@ set -x
 here=$(dirname $0)
 . $here/../common/setvars
 #
+umask 002
 chown -R $user.$group $public/*
 find $public -type d -exec chmod 2775 {} \;
 find $public -type f -exec chmod 664 {} \;

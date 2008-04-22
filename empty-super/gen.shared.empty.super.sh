@@ -26,6 +26,7 @@ set -x
 here=$(dirname $0)
 . $here/../common/setvars
 #
+umask 002
 wd=$home/$user/gw
 #
 # Supermodule:

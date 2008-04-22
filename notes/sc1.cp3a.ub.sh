@@ -20,38 +20,20 @@
 #    If not, see <http://www.gnu.org/licenses/>.
 #
 set -x
-#
-# Housekeeping: set up working directory for this test.
-#
-here=$(dirname $0)
-. $here/../common/setvars
-#
 umask 002
-wd=$home/$user/gw
-rm -rf $wd
-mkdir $wd
-#
-# Submodules:
-# - Initialize a submodule repository
-# - Run the first commit
-# - Make a bare clone
-# - Move the clone to the public area
-#
-for submod in $submods
-do
-	cd $wd
-	rm -rf $submod
-	mkdir $submod
-	cd $submod
-	git init
-	echo "#" >.gitignore
-	git add .gitignore
-	git commit -m "First ignore"
-	cd ..
-	rm -rf $submod.bare
-	git clone --bare $submod $submod.git
-	rm -rf $public/$submod.git
-	mv $submod.git $public
-	rm -rf $submod
-done
+# Prep
+cd super
+git pull
+git submodule update
+cd suba
+git checkout master
+git pull
+# add work
+echo b >b.txt
+git add .
+git commit -m "Add file b.txt"
+git pull
+git push
 set +x
+
+

@@ -73,7 +73,9 @@ User:gub: S--------------3---4--------------------------------------------------
 <h3>Commit/Push  1 - User:gua - Submodule</h3>
 Typical Command Sequence:
 <pre class="bl" >
+<!-- See: sc1.cp1a.ua.sh -->
 umask 002
+cd
 cd super
 cd suba
 echo a >>a.txt
@@ -106,7 +108,10 @@ To file:///public/repos/suba.git
 <h3>Commit/Push 2 - User:gua - Supermodule</h3>
 Typical Command Sequence:
 <pre class="bl" >
-cd ..
+<!-- See: sc1.cp2a.ua.sh -->
+umask 002
+cd
+cd super
 git status
 git commit -a -m "Update suba with a.txt"
 git pull
@@ -140,6 +145,7 @@ To /public/repos/super.git
 <h3>Commit/Push  3 - User:gub - Submodule</h3>
 Typical Command Sequence:
 <pre class="bl" >
+<!-- See: sc1.cp2a.ub.sh -->
 umask 002
 # Prep
 cd super
@@ -209,7 +215,10 @@ To file:///public/repos/suba.git
 <h3>Commit/Push  4 - User:gub - Supermodule</h3>
 Typical Command Sequence:
 <pre class="bl" >
-cd ..
+<!-- See: sc1.cp4a.ub.sh -->
+umask 002
+cd
+cd super
 git status
 git commit -a -m "Update suba with b.txt"
 git pull
@@ -264,6 +273,10 @@ User:gub: S---------2---------4-------------------------------------------------
 <h3>Commit/Push  1 - User:gua - Submodule</h3>
 Typical Command Sequence:
 <pre class="bl" >
+<!-- See: sc2.cp1a.ua.sh -->
+umask 002
+cd
+cd super
 cd suba
 echo a >>a.txt
 git add a.txt
@@ -302,6 +315,10 @@ To file:///public/repos/suba.git
 <h3>Commit/Push  2 - User:gub - Submodule</h3>
 Typical Command Sequence:
 <pre class="bl" >
+<!-- See: sc2.cp2a.ub.sh -->
+umask 002
+cd
+cd super
 cd suba
 echo bb >>b.txt
 git add .
@@ -339,7 +356,10 @@ To file:///public/repos/suba.git
 <h3>Commit/Push  3 - User:gua - Supermodule</h3>
 Typical Command Sequence:
 <pre class="bl" >
-cd ..
+<!-- See: sc2.cp3a.ua.sh -->
+umask 002
+cd
+cd super
 git status
 git add .
 git commit -m "Update submodule suba from $(pwd)"
@@ -376,6 +396,10 @@ Conflict Resolution</a> page help?  It seems to. We continue:
 </p>
 Recovery Command Sequence:
 <pre class="bl" >
+<!-- See: sc2.cp3b.ua.sh -->
+umask 002
+cd
+cd super
 git submodule update
 git add suba
 git commit -m "Update submodule suba from $(pwd), after conflict"
@@ -408,7 +432,10 @@ To /public/repos/super.git
 <h3>Commit/Push  4 - User:gub - Supermodule</h3>
 Typical Command Sequence:
 <pre class="bl" >
-cd ..
+<!-- See: sc2.cp4a.ub.sh -->
+umask 002
+cd
+cd super
 git status
 git add suba
 git commit -m "Update suba from $(pwd)"
@@ -453,13 +480,12 @@ To /public/repos/super.git
 <h1>Scenario 3</h1>
 <h2>General Description</h2>
 <p>
-This scenario shows typical workflows between two users, where the workflows are
+This scenario shows another typical workflow between two users, where the workflows are
 such that:
 </p>
 <ol>
 <li>There <em>are</em> merge conflicts</li>
 <li>There are some timing overlaps which might cause changes in standard workflows</li>
-<li>Timing overlaps are significant</li>
 </ol>
 <p style="color: blue" >
 Note: this scenario continues <em>immediately after</em> the conclusion of Scenario 2.
@@ -473,6 +499,10 @@ User:gub: S---------2---3-------------------------------------------------------
 <h3>Commit/Push  1 - User:gua - Submodule</h3>
 Typical Command Sequence:
 <pre class="bl" >
+<!-- See: sc3.cp1a.ua.sh -->
+umask 002
+cd
+cd super
 cd suba
 git checkout master
 echo a >>a.txt
@@ -508,6 +538,10 @@ To file:///public/repos/suba.git
 <h3>Commit/Push  2 - User:gub - Submodule</h3>
 Typical Command Sequence:
 <pre class="bl" >
+<!-- See: sc3.cp2a.ub.sh -->
+umask 007
+cd
+cd super
 cd suba
 git checkout master
 echo bb >>b.txt
@@ -548,7 +582,10 @@ To file:///public/repos/suba.git
 <h3>Commit/Push  3 - User:gub - Supermodule</h3>
 Typical Command Sequence:
 <pre class="bl" >
-cd ..
+<!-- See: sc3.cp3a.ub.sh -->
+umask 002
+cd
+cd super
 git status
 git add .
 git commit -m "Update submodules from $(pwd)"
@@ -584,7 +621,10 @@ To /public/repos/super.git
 <h3>Commit/Push  4 - User:gua - Supermodule</h3>
 Typical Command Sequence:
 <pre class="bl" >
-cd ..
+<!-- See: sc3.cp4a.ua.sh -->
+umask 002
+cd
+cd super
 git status
 git add .
 git commit -m "Update submodules from $(pwd)"
@@ -620,6 +660,10 @@ Automatic merge failed; fix conflicts and then commit the result.
 </p>
 Recovery Command Sequence:
 <pre class="bl" >
+<!-- See: sc3.cp4b.ua.sh -->
+umask 002
+cd
+cd super
 git submodule update
 git add suba
 git commit -m "Update submodule suba from $(pwd), after conflict"
