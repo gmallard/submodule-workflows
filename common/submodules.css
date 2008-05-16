@@ -66,3 +66,37 @@ font-weight: bold;
 text-align: left
 }
 
+div.container
+{
+	width:			100%;
+	margin:			0px;
+	border:			1px solid gray;
+	line-height:	150%;
+}
+div.header, div.footer
+{
+	padding:			0.5em;
+	color:				black;
+/* 	background-color:	#ddd; */
+	clear:				left;
+	text-align:			center;
+}
+div.left
+{
+	float:		left;
+	border-top:		1px solid gray;
+	width:		160px;
+	margin:		0;
+	padding:	1em;
+/*	background-color:	#eee; */
+}
+div.content
+{
+	margin-left:	160px;
+	border-top:		1px solid gray;
+	border-bottom:	1px solid gray;
+	border-left:	1px solid gray;
+	padding:		1em;
+/*	text-indent:	1em; */
+}
+
