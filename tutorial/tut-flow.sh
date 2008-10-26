@@ -66,7 +66,7 @@ cd ~/subtut/private
 git clone ~/subtut/public/super
 cd super
 #
-for mod in a b c d; do git submodule add ~/subtut/public/$mod; done
+for mod in a b c d; do git submodule add ~/subtut/public/$mod $mod; done
 ls -a
 #
 # The "git submodule add" command does a couple of things:
@@ -136,7 +136,7 @@ git branch
 # branch, make your changes, publish the change within the submodule, and 
 # then update the superproject to reference the new commit:
 #
-git branch
+pwd
 git checkout master
 echo "adding a line again" >> a.txt
 git commit -a -m "Updated the submodule from within the superproject."
@@ -147,29 +147,38 @@ git commit -m "Updated submodule a."
 git show | cat
 git push
 #
-# Switch back to the other private checkout; the new change should be visible.
+# Switch back to the other private checkout; the new change should be visible
+# (after a pull in the supermodule followed by a sbubmodue update).
 # 
 cd ~/subtut/private/super
 git pull
-git submodule update
 #
-# Here we run in to trouble.  The command in the tutorial is:
+# Here we run in to trouble.  The commands in the tutorial are:
 #
+# git submodule update
 # cat a/a.txt
 #
 # However that yeilds incorrect results:  the new change is in fact not
 # visible.
 #
 # The following does work:
+#
+# git submodule update --init
+# cat a/a.txt
+git submodule update --init
+cat a/a.txt
+#
+# The following also works (but is probably not correct use):
+#
 # - cd to the submodule directory
 # - checkout the master brnach
 # - run pull
 # 
-cd a
-git checkout master
-git pull
+# cd a
+# git checkout master
+# git pull
 #
 # Display the file with the new change.
 #
-cat a.txt
+# cat a.txt
 set +x

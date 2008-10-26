@@ -154,25 +154,33 @@ git push
 # 
 cd ~/subtut/private/super
 git pull
-git submodule update
 #
-# Here we run in to trouble.  The command in the tutorial is:
+# Here we run in to trouble.  The commands in the tutorial are:
 #
+# git submodule update
 # cat a/a.txt
 #
 # However that yeilds incorrect results:  the new change is in fact not
 # visible.
 #
 # The following does work:
+#
+# git submodule update --init
+# cat a/a.txt
+git submodule update --init
+cat a/a.txt
+#
+# The following also works (but is probably not correct use):
+#
 # - cd to the submodule directory
 # - checkout the master brnach
 # - run pull
 # 
-cd a
-git checkout master
-git pull
+# cd a
+# git checkout master
+# git pull
 #
 # Display the file with the new change.
 #
-cat a.txt
+# cat a.txt
 set +x
