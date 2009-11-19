@@ -178,7 +178,10 @@ cat a/a.txt
 # 
 # cd a
 # git checkout master
+# Then the following works of course.
 # git pull
+# But this is probably best:
+# git merge origin/master
 #
 # Display the file with the new change.
 #

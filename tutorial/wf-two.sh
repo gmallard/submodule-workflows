@@ -35,4 +35,8 @@ git submodule update
 #
 cd a
 git checkout master
-git pull
+#
+#git pull
+#
+# git merge origin/master
+
