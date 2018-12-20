@@ -95,6 +95,9 @@ basic system administration.</p>
 In all cases, you may need to consult your system man pages.
 </p>
 <h2>Define the git Administrative User</h2>
+<p>
+You should be prompted for a password, and some other administrative details.
+</p>        
 <pre class="bl" >
 adduser gitadmin
 </pre>
@@ -115,13 +118,16 @@ usermod -a -G git gub
 usermod -a -G git $USER
 </pre>
 <h2>Create the Public Repository Directory</h2>
+<p>
+The repository directory may be created at any convenient location.
+</p>
 <pre class="bl" >
-mkdir -p /public/repos
+mkdir -p /home/opt/public/repos
 </pre>
 <h2>Set the Public Repository Directory Permissions</h2>
 <pre class="bl" >
-chown gitadmin.git /public/repos
-chmod 2775 /public/repos
+chown gitadmin.git /home/opt/public/repos
+chmod 2775 /home/opt/public/repos
 </pre>
 <hr />
 <p>Back to main page: <a href="../readme.html">Main</a>
@@ -133,4 +139,3 @@ chmod 2775 /public/repos
 </div>
 </body>
 </html>
-
