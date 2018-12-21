@@ -1,6 +1,6 @@
 /* 
 
- Copyright (C) 2008 Guy Allard
+ Copyright (C) 2008-2018 Guy Allard
 
  This file is part of the git Submodules Workflows project.
 
@@ -45,7 +45,7 @@ hr {
 color:navy
 } 
 p {
-font-size:11pt; 
+font-size:12pt; 
 margin-left: 15px
 } 
 a:link {

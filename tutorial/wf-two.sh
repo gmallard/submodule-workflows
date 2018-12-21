@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# Copyright (C) 2008 Guy Allard
+# Copyright (C) 2008-2018 Guy Allard
 #
 # This file is part of the git Submodules Workflows project.
 #
@@ -20,11 +20,12 @@
 #    If not, see <http://www.gnu.org/licenses/>.
 #
 set -x
+base=/home/opt/public/repos
 #
 # Pick up private clone name from command line.
 #
 p=$1
-cd ~/subtut/$p/super
+cd $base/subtut/$p/super
 #
 # Pull updates from supermodule
 #
@@ -35,8 +36,5 @@ git submodule update
 #
 cd a
 git checkout master
-#
-#git pull
-#
-# git merge origin/master
-
+git pull
+cat a.txt
