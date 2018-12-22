@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# Copyright (C) 2008 Guy Allard
+# Copyright (C) 2008-2018 Guy Allard
 #
 # This file is part of the git Submodules Workflows project.
 #
@@ -25,8 +25,8 @@ umask 002
 #
 # Housekeeping: set up working directory for this test.
 #
-here=$(dirname $0)
-. $here/../common/setvars
+hn=$(dirname $0)
+source $hn/../common/setvars
 #
 # Test repository:
 # - Clone the public supermodule

@@ -1,5 +1,5 @@
 #
-# Copyright (C) 2008 Guy Allard
+# Copyright (C) 2008-2018 Guy Allard
 #
 # This file is part of the git Submodules Workflows project.
 #
@@ -30,7 +30,7 @@ home=/home
 #
 # Location of public read/write area
 #
-public=/public/repos
+public=/home/opt/public/repos
 #
 # List of submodules to create.
 #

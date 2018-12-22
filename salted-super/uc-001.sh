@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# Copyright (C) 2008 Guy Allard
+# Copyright (C) 2008-2018 Guy Allard
 #
 # This file is part of the git Submodules Workflows project.
 #
@@ -27,9 +27,9 @@ cmds=$(dirname $0)
 echo $cmds
 #
 # Run:
-# - Pull all changes in work flow two
-# - Work that changes files in work flow one
+# - Work that changes files is done in work flow one
+# - Pull all changes is done in work flow two
 #
-$cmds/wf-two.sh
 $cmds/wf-one.sh
+$cmds/wf-two.sh
 #
