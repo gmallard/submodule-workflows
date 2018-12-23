@@ -33,7 +33,7 @@ source $hn/../common/setvars
 # - Initialize each submodule
 # - Checkout the master branch in each submodule
 #
-git clone file://$public/super.git
+git clone $public/super.git
 cd super
 git submodule init
 git submodule update
@@ -46,4 +46,3 @@ do
 	cd ..
 done
 cd ..
-

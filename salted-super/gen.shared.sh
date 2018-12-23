@@ -25,6 +25,7 @@ set -x
 #
 hn=$(dirname $0)
 source $hn/../common/setvars
+umask 002
 rm -rf $public/*
 #
 wd=$home/$user/gw
@@ -79,7 +80,7 @@ do
 	#
 	for sm in $submods
 	do
-		git submodule add file://$public/$sm.git
+		git submodule add $public/$sm.git
 	done
 	git add .
 	git commit -m "Add submodules."
