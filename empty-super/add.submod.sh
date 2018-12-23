@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# Copyright (C) 2008 Guy Allard
+# Copyright (C) 2008-2018 Guy Allard
 #
 # This file is part of the git Submodules Workflows project.
 #
@@ -23,19 +23,20 @@ set -x
 #
 # Housekeeping: set up working directory for this test.
 #
-here=$(dirname $0)
-. $here/../common/setvars
+hn=$(dirname $0)
+source $hn/../common/setvars
 #
 wd=$home/$user/gw
 umask 002
 #
-# Testrepo:
-# - Clone the supermodu;e
-# - For each submodule
+# For Each Testrepo:
+# - Make a repo directory, and CD to it
+# - Clone the supermodule
+# - Then, for each submodule:
 # --add the submodule
-# --init the submodule
-# --commit the result
-# --push the result to the public supermodule
+# -- Commit the result
+# Finally:
+# Push it all.
 #
 for repo in $testrepos
 do
@@ -43,12 +44,27 @@ do
 	cd $wd/$repo
 	git clone $public/super.git super
 	cd super
+	git checkout master
+	#
+	# The super repo created above is not set up for submodules at all.
+	# That needs to be done on an individual submodule basis.
+	#
 	for submod in $submods
 	do
-		git submodule add file://$public/$submod.git
-		git submodule init $submod
-		git add $submod
-		git commit -m "In repo: $repo, add submodule: $submod"
-		git pull && git push
+		# Submodule add does:
+		# 1) Clones the submodule under the current directory and by default
+		#    checks out the master branch.
+		# 2) Adds the submodule's clone path to the ".gitmodules" file and adds
+		#    this file to the index, ready to be committed.
+		# 3) Adds the submodule's current commit ID to the index, ready to be
+		#    committed.
+		git submodule add $public/$submod.git
+		git status
+		#
+		git commit -m "Added submodule $public/$submod.git."
 	done
+	#
+	# Push the results to the public bare super.
+	#
+	git push
 done

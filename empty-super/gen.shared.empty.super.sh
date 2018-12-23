@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# Copyright (C) 2008 Guy Allard
+# Copyright (C) 2008-2018 Guy Allard
 #
 # This file is part of the git Submodules Workflows project.
 #
@@ -23,8 +23,8 @@ set -x
 #
 # Housekeeping: set up working directory for this test.
 #
-here=$(dirname $0)
-. $here/../common/setvars
+hn=$(dirname $0)
+source $hn/../common/setvars
 #
 umask 002
 wd=$home/$user/gw
@@ -32,8 +32,10 @@ wd=$home/$user/gw
 # Supermodule:
 # - Initialize it
 # - Run first commit
-# - Clone a bare copy
-# - Move the bare copy to the public area
+# - Create a bare public repo.
+# - Add that repo as a remote
+# - Push the result.
+# - Remove the working super repo
 #
 for super in $supers
 do
@@ -45,11 +47,12 @@ do
 	echo "#" >.gitignore
 	git add .gitignore
 	git commit -m "First ignore"
+	pushd $public
+	git init --bare $super.git
+	popd
+	git remote add origin $public/$super.git
+	git push -u origin master
 	cd ..
-	rm -rf $super.bare
-	git clone --bare $super $super.git
-	rm -rf $public/$super.git
-	mv $super.git $public
 	rm -rf $super
 	#
 done

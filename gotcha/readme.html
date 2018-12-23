@@ -3,7 +3,7 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <!--
 
-Copyright (C) 2008 Guy Allard
+Copyright (C) 2008-2018 Guy Allard
 
 This file is part of the git Submodules Workflows project.
 
@@ -51,8 +51,6 @@ The Gotcha Example
 <br />
 <a href="../salted-super/readme.html">Salted</a>
 <br />
-<br />
-<a href="../notes/readme.html">Miscellaneous</a>
 </div>
 <div class="content" >
 <br />
@@ -69,101 +67,97 @@ Git Submodule Tutorial</a>.</p>
 <a href="../salted-super/readme.html">Salted Supermodule</a>
  example up through and including the use of <em>clone-001.sh</em> to
 clone the public supermodule repository.</p>
+<p>Then change to the <em>super</em> directory.</p>
 <h1>Out of Sequence Workflow</h1>
 <p>From the <em>first user</em>, run the <em>wf-one-wrong.sh</em> script in this directory.  
 The following sequence of commands
 are executed:</p>
 <pre class="bl" >
-cd suba
+cd submoda
 echo aline no push submod:  $repo  user: $USER >>a.txt
 git add .
 git commit -m "Add a line in repo: $repo, user $USER, no push"
 cd ..
 git add .
 git commit -m "update submodule $repo, user $USER"
-git pull
-git push
+git pull && git push
 </pre>
-<p>The results should look like:</p>
+<p>The results should look something like:</p>
 <pre class="bl" >
-+ cd suba
++ cd submoda
 + echo aline no push submod: user: gua
 + git add .
 + git commit -m 'Add a line in repo: , user gua, no push'
-Created commit e3812de: Add a line in repo: , user gua, no push
- 1 files changed, 1 insertions(+), 0 deletions(-)
+[master 900f6dc] Add a line in repo: , user gua, no push
+   1 file changed, 1 insertion(+)
+   create mode 100644 a.txt
 + cd ..
 + git add .
 + git commit -m 'update submodule , user gua'
-Created commit 764f692: update submodule , user gua
- 1 files changed, 1 insertions(+), 1 deletions(-)
+[master 69f9fed] update submodule , user gua
+   1 file changed, 1 insertion(+), 1 deletion(-)
 + git pull
-Already up-to-date.
+Already up to date.
 + git push
-Counting objects: 3, done.
+Counting objects: 2, done.
+Delta compression using up to 8 threads.
 Compressing objects: 100% (2/2), done.
-Writing objects: 100% (2/2), 258 bytes, done.
+Writing objects: 100% (2/2), 253 bytes | 253.00 KiB/s, done.
 Total 2 (delta 1), reused 0 (delta 0)
-Unpacking objects: 100% (2/2), done.
-To file:///public/repos/super.git
-   7aed009..764f692  master -> master
+To /home/opt/public/repos/super.git
+   4fc51a8..69f9fed  master -> master
++ set +x      
 </pre>
 <h1>Seeing The Uncloneable Affect</h1>
 <p>To see what this causes, from the <em>second user</em>, execute the
-<em>wf-two-broke.sh</em> script in this directory.</p>
+<em>wf-two-broke.sh</em> script in the super directory.</p>
 <p>The following sequence of commands is executed:</p>
 <pre class="bl" >
 git pull
 git submodule update
 </pre>
-<p>The results should look like:</p>
+<p>The results should look something like:</p>
 <pre class="bl" >
 + git pull
-remote: Counting objects: 3, done.
-remote: Compressing objects: 100% (2/2)remote: , done.
-remote: Total 2 (delta 1), reused 0 (delta 0)
-Unpacking objects: 100% (2/2), done.
-From file:///public/repos/super
-   7aed009..764f692  master     -> origin/master
-Updating 7aed009..764f692
-Fast forward
- suba |    2 +-
- 1 files changed, 1 insertions(+), 1 deletions(-)
+Already up to date.
 + git submodule update
-error: pathspec 'e3812de059e72e45cea6497c31e6b60707b2914e' did not match any file(s) known to git.
-Did you forget to 'git add'?
-Unable to checkout 'e3812de059e72e45cea6497c31e6b60707b2914e' in submodule path 'suba'
+error: Server does not allow request for unadvertised object 900f6dc07e8d2be60ac68de1bbfd41f07a81bfef
+Fetched in submodule path 'submoda', but it did not contain 900f6dc07e8d2be60ac68de1bbfd41f07a81bfef. Direct fetching of that commit failed.
++ set +x      
 </pre>
 <h1>Fix Procedure</h1>
 <p>The procedure to fix this is simple.  The offending user should:</p>
 <ol>
-<li>Push the missing commit from the submodule</li>
+<li>Push the missing commit from the submodule.</li>
 </ol>
-<p>This looks like:</p>
+<p>This looks something like:</p>
 <pre class="bl" >
-gua@oldpete:~/super$ cd suba
-gua@oldpete:~/super/suba$ git status
-# On branch master
-nothing to commit (working directory clean)
-gua@oldpete:~/super/suba$ git push
-Counting objects: 5, done.
-Compressing objects: 100% (3/3), done.
-Writing objects: 100% (3/3), 337 bytes, done.
+gua@tjjackson:~/gitwork/super$ cd submoda/
+gua@tjjackson:~/gitwork/super/submoda$ git status
+On branch master
+Your branch is ahead of 'origin/master' by 1 commit.
+   (use "git push" to publish your local commits)
+
+nothing to commit, working tree clean
+gua@tjjackson:~/gitwork/super/submoda$ git push
+Counting objects: 3, done.
+Delta compression using up to 8 threads.
+Compressing objects: 100% (2/2), done.
+Writing objects: 100% (3/3), 319 bytes | 319.00 KiB/s, done.
 Total 3 (delta 0), reused 0 (delta 0)
-Unpacking objects: 100% (3/3), done.
-To file:///public/repos/suba.git
-   62c2285..e3812de  master -> master
+To /home/opt/public/repos/submoda.git
+   a04149f..900f6dc  master -> master      
 </pre>
 <p>Then the other user can reissue the submodule update, like:</p>
 <pre class="bl" >
-gub@oldpete:~/super$ git submodule update
-remote: Counting objects: 5, done.
-remote: Compressing objects: 10remote: 0% (3/3), done.
+gub@tjjackson:~/gitwork/super$ git submodule update
+remote: Counting objects: 3, done.
+remote: Compressing objects: 100% (2/2), done.
 remote: Total 3 (delta 0), reused 0 (delta 0)
 Unpacking objects: 100% (3/3), done.
-From file:///public/repos/suba
-   62c2285..e3812de  master     -> origin/master
-Submodule path 'suba': checked out 'e3812de059e72e45cea6497c31e6b60707b2914e'
+From /home/opt/public/repos/submoda
+   a04149f..900f6dc  master     -> origin/master
+Submodule path 'submoda': checked out '900f6dc07e8d2be60ac68de1bbfd41f07a81bfef'
 </pre>
 <p>and continue with normal workflows.</p>
 <h1>Fingering the Offending User</h1>
@@ -171,10 +165,7 @@ Submodule path 'suba': checked out 'e3812de059e72e45cea6497c31e6b60707b2914e'
 causing the problem.  After all, there are only two users.<p>
 <p>In this example, after the submodule update fails, if one immediately issues
 <em>git log</em>, the offending user is identified by the last commit.
-<em>(Will this always be true?  The author needs to think a little more 
-about that.)</em></p>
-<h2>The Case of Many Users</h2>
-<p>The author needs to think a little more about this case.</p>
+</p>
 <h1>Read the script code</h1>
 <p>Well, ......</p>
 <hr />

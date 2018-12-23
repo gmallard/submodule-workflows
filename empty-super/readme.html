@@ -3,7 +3,7 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <!--
 
-Copyright (C) 2008 Guy Allard
+Copyright (C) 2008-2018 Guy Allard
 
 This file is part of the git Submodules Workflows project.
 
@@ -29,14 +29,14 @@ This file is part of the git Submodules Workflows project.
 <meta name="keywords" content="git, SCM, Submodules" />
 <link rel="stylesheet" type="text/css" href="../common/submodules.css" />
 <title>
-The Empty Supermodule Examples
+The Empty Supermodule Example
 </title>
 </head>
 <body>
 <div class="container" >
 <div class="header" >
 <h1 style="text-align: center; text-decoration: underline" >
-The Empty Supermodule Examples
+The Empty Supermodule Example
 </h1>
 <br />
 </div>
@@ -51,12 +51,13 @@ The Empty Supermodule Examples
 <a href="../salted-super/readme.html">Salted</a>
 <br />
 <a href="../gotcha/readme.html">Gotcha</a>
-<br />
-<a href="../notes/readme.html">Miscellaneous</a>
 </div>
 <div class="content" >
 <h1>Introduction</h1>
-<p>This page describes the empty supermodule examples.</p>
+<p>This page describes the empty supermodule example.  The intent is to show
+how to<br/>begin with a bare public super repository that has not been set up
+with submodules.<br/>Then to subsequently work with that environment.
+</p>
 <h1>System Requirements</h1>
 <p>Required components and environment are:</p>
 <ul>
@@ -65,23 +66,23 @@ The Empty Supermodule Examples
 <a href="../notes/admin.html" >Administrative Setup</a></li>
 </ul>
 <h1>Instructions</h1>
-<p>Using your own user ID, change to the <em>empty-super</em> subdirectory, and run the scripts in the 
+<p>Using your own user ID, change to the <em>empty-super</em> subdirectory, and run these scripts in the 
 following order:</p>
 <ol>
 <li>./gen.shared.submods.sh</li>
 <li>./gen.shared.empty.super.sh</li>
-<li>./set-perms.sh</li>
 <li>./add.submod.sh</li>
 </ol>
 <p>
-In a separate terminal (or terminals), change to one of the supermodule 
-directories created by <em>./add.submod.sh</em>.  Then:
+In a separate terminal (or terminals):
 </p>
 <ol>
+<li>change to the supermodule 
+directory created by <em>./add.submod.sh</em></li>
 <li>Add the <em>empty-super</em> directory to $PATH</li>
 <li>uc-001.sh</li>
 </ol>
-<p>The latter script may be executed multiple times from either of the repo direcotries created by
+<p>The latter script may be executed multiple times from the repo directory created by
 <em>./add.submod.sh</em>.
 </p>
 <p>Other users in the git group may participate by:</p>
@@ -89,12 +90,13 @@ directories created by <em>./add.submod.sh</em>.  Then:
 <li>Change to directory $HOME</li>
 <li>Add the <em>empty-super</em> directory to $PATH</li>
 <li>get.submods.sh</li>
+<li>cd super</li>
 </ol>
 <p>And then:</p>
 <ol>
 <li>uc-001.sh</li>
 </ol>
-<p>The latter script may then be executed multiple times from any git user.</p>
+<p>The latter script may then be executed multiple times by any git user.</p>
 <h1>Read the Code</h1>
 <p>Well, ......</p>
 <hr />

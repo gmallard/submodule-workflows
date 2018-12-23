@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# Copyright (C) 2008 Guy Allard
+# Copyright (C) 2008-2018 Guy Allard
 #
 # This file is part of the git Submodules Workflows project.
 #
@@ -23,18 +23,21 @@ set -x
 #
 # Housekeeping: set up working directory for this test.
 #
-here=$(dirname $0)
-. $here/../common/setvars
+hn=$(dirname $0)
+source $hn/../common/setvars
+umask 002
+rm -rf $public/*
 #
 wd=$home/$user/gw
 rm -rf $wd
-mkdir $wd
+mkdir -p $wd
 #
 # Submodules:
 # - Create empty repo
 # - Run first commit in it
-# - Clone it to a bare repo
-# - Move it to the public area
+# - Create a bare repo
+# - Add that as a remote
+# - Push it to the remote
 #
 for m in $submods
 do
@@ -46,12 +49,11 @@ do
 	echo "#" >.gitignore
 	git add .gitignore
 	git commit -m "First ignore"
-	cd ..
-	rm -rf $m.bare
-	git clone --bare $m $m.git
-	rm -rf $public/$m.git
-	mv $m.git $public
-	rm -rf $m
+	pushd $public
+	git init --bare $m.git
+	popd
+	git remote add origin $public/$m.git
+	git push -u origin master
 	#
 done
 #
@@ -61,8 +63,9 @@ done
 # - Run the first commit
 # - Add each submodule
 # - Commit the adds
-# - Clone the super to a bare copy
-# - Move the bare clone to the public area
+# - Create a bare repo
+# - Add that as a remote
+# - Push the super to the remote
 #
 for m in $supers
 do
@@ -77,22 +80,17 @@ do
 	#
 	for sm in $submods
 	do
-		git submodule add file://$public/$sm.git
+		git submodule add $public/$sm.git
 	done
 	git add .
 	git commit -m "Add submodules."
 	#
-	cd ..
-	rm -rf $m.bare
-	git clone --bare $m $m.git
-	rm -rf $public/$m.git
-	mv $m.git $public
-	rm -rf $m
+	pushd $public
+	git init --bare $m.git
+	popd
+	git remote add origin $public/$m.git
+	git push -u origin master
 	#
 done
-#
-chown -R $user.$group $public/*
-find $public -type d -exec chmod 2775 {} \;
-find $public -type f -exec chmod 664 {} \;
 #
 set +x

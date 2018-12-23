@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# Copyright (C) 2008 Guy Allard
+# Copyright (C) 2008-2018 Guy Allard
 #
 # This file is part of the git Submodules Workflows project.
 #
@@ -34,77 +34,93 @@ set -x
 # clone the superproject can easily clone all the submodules at the same revision.
 #
 # For the purposes of the tutorial, the public repositories will be published under 
-# your home directory in ~/subtut/public. Let's create the four public 
+# your home directory in /home/opt/public/repos/subtut/public. Let's create the four
 # submodule repositories first:
 #
-rm -rf ~/subtut
-mkdir ~/subtut ~/subtut/public
-cd ~/subtut/public
+umask 002
+base=/home/opt/public/repos
+rm -rf $base/subtut
+#
+mkdir -p $base/subtut/private $base/subtut/public
 for mod in a b c d; do
+    # First the private repository.
+    cd $base/subtut/private
     mkdir $mod
     cd $mod
     git init
     echo "module $mod" > $mod.txt
     git add $mod.txt
     git commit -m "Initial commit, public module $mod"
+    # Then the public bare repository.
+    cd $base/subtut/public
+    mkdir $mod.git
+    cd $mod.git
+    git init --bare
+    # Back to the private repo.  Set up origin.
+    cd $base/subtut/private
+    cd $mod
+    git remote add origin $base/subtut/public/$mod.git
+    git config branch.master.remote origin
+    git config branch.master.merge refs/heads/master
+    # And push work so far.
+    git push -u origin master
     cd ..
 done
 #
-# Now create the public superproject; we won't actually add the submodules yet.
-#
+# Now the super project.  We do not actually add submodules yet.
+cd $base/subtut/private
+# The private super repository.
 mkdir super
 cd super
 git init
 echo hi > super.txt
 git add super.txt
 git commit -m "Initial commit of empty superproject"
-#
-# Check out the superproject somewhere private and add all the submodules.
-#
-mkdir ~/subtut/private
-cd ~/subtut/private
-git clone ~/subtut/public/super
+# The public bare super repository.
+cd $base/subtut/public
+mkdir super.git
+cd super.git
+git init --bare
+# Back to the private repo
+cd $base/subtut/private
 cd super
+git remote add origin $base/subtut/public/super.git
+git config branch.master.remote origin
+git config branch.master.merge refs/heads/master
 #
-for mod in a b c d; do git submodule add ~/subtut/public/$mod $mod; done
-ls -a
+git push -u origin master
 #
-# The "git submodule add" command does a couple of things:
+# Add the submodules ato the super project and look around.
 #
-#     * It clones the submodule under the current directory and by default checks out the master branch.
-#     * It adds the submodule's clone path to the ".gitmodules" file and adds this file to the index, ready to be committed.
-#     * It adds the submodule's current commit ID to the index, ready to be committed. 
-#
+cd $base/subtut/private
+cd super
+for mod in a b c d; do git submodule add $base/subtut/public/$mod.git $mod; done
 cat .gitmodules
 #
+# Commit the submodules add
+#
+git commit -m "Add submodules a, b, c, d."
+echo "================================================"
+#
+# Look around
+#
+ls -a
+echo "================================================"
 git status
 #
-# Let's take a quick poke around one of the submodule checkouts.
+# Push the added submodule definitions
 #
-cd a
-ls -a
-#
-git branch
-#
-# It looks just like a regular checkout:
-#
-cat .git/config
-#
-# Commit the superproject and publish it:
-#
-cd ..
-git commit -m "Add submodules a, b, c, d."
 git push
 #
 # Now look at it from the perspective of another developer:
 #
-mkdir ~/subtut/private2
+mkdir $base/subtut/private2
 #
 # cd !$   # replaced with ....
 #
-cd ~/subtut/private2
-git clone ~/subtut/public/super
-cd ~/subtut/private2/super
+cd $base/subtut/private2
+git clone $base/subtut/public/super
+cd $base/subtut/private2/super
 ls -a
 #
 # The submodule directories are there, but they're empty:
@@ -122,63 +138,45 @@ git config -l
 # commits specified in the superproject.
 #
 git submodule update
+#
+# Look at what is in the a submodule.
+#
 cd a
 ls -a
-#
-# One major difference between "submodule update" and "submodule add" is that 
-# "update" checks out a specific commit, rather than the tip of a branch. It's 
-# like checking out a tag: the head is detached, so you're not working 
-# on a branch.
-#
+git status
 git branch
 #
-# If you want to make a change within a submodule, you should first check out a 
-# branch, make your changes, publish the change within the submodule, and 
-# then update the superproject to reference the new commit:
+# One major difference between "submodule update" and "submodule add" is that
+# "update" checks out a specific commit, rather than the tip of a branch. It's
+# like checking out a tag: the head is detached, so you're not working on a
+# branch.
 #
-pwd
+# Now checkout the working branch, make a change, and oush it.
+#
 git checkout master
 echo "adding a line again" >> a.txt
 git commit -a -m "Updated the submodule from within the superproject."
 git push
+#
+# cd back to the base of the super project.
+#
 cd ..
+#
+# Add and commit the changed submodule (a in this case).
+#
 git add a
-git commit -m "Updated submodule a."
-git show | cat
+git commit -m "Changed submodule a"
+git show
+#
+# And push that change to super's public repo.
+#
 git push
 #
-# Switch back to the other private checkout; the new change should be visible
-# (after a pull in the supermodule followed by a sbubmodue update).
-# 
-cd ~/subtut/private/super
+# Switch to the other private checkout, pull the changes, and update the
+# submodule.  The change to submodule a should be present.
+#
+cd $base/subtut/private/super
 git pull
-#
-# Here we run in to trouble.  The commands in the tutorial are:
-#
-# git submodule update
-# cat a/a.txt
-#
-# However that yeilds incorrect results:  the new change is in fact not
-# visible.
-#
-# The following does work:
-#
-# git submodule update --init
-# cat a/a.txt
-git submodule update --init
+git submodule update
 cat a/a.txt
-#
-# The following also works (but is probably not correct use):
-#
-# - cd to the submodule directory
-# - checkout the master brnach
-# - run pull
-# 
-# cd a
-# git checkout master
-# git pull
-#
-# Display the file with the new change.
-#
-# cat a.txt
 set +x

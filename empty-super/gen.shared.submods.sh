@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# Copyright (C) 2008 Guy Allard
+# Copyright (C) 2008-2018 Guy Allard
 #
 # This file is part of the git Submodules Workflows project.
 #
@@ -23,13 +23,14 @@ set -x
 #
 # Housekeeping: set up working directory for this test.
 #
-here=$(dirname $0)
-. $here/../common/setvars
+hn=$(dirname $0)
+source $hn/../common/setvars
+rm -rf $public/*
 #
 umask 002
 wd=$home/$user/gw
 rm -rf $wd
-mkdir $wd
+mkdir -p $wd
 #
 # Submodules:
 # - Initialize a submodule repository
@@ -47,11 +48,13 @@ do
 	echo "#" >.gitignore
 	git add .gitignore
 	git commit -m "First ignore"
-	cd ..
-	rm -rf $submod.bare
-	git clone --bare $submod $submod.git
-	rm -rf $public/$submod.git
-	mv $submod.git $public
-	rm -rf $submod
+	pushd $public
+	git init --bare $submod.git
+	popd
+	git remote add origin $public/$submod.git
+	git push -u origin master
+	#
 done
+#
+rm -rf $wd/*
 set +x

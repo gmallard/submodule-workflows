@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# Copyright (C) 2008 Guy Allard
+# Copyright (C) 2008-2018 Guy Allard
 #
 # This file is part of the git Submodules Workflows project.
 #
@@ -22,18 +22,26 @@
 set -x
 #
 umask 002
+hn=$(dirname $0)
+source $hn/../common/setvars
 #
-# Do work in a submodule
+# Do work in each submodule
 #
-cd suba
-echo aline  submod:  $repo  user: $USER >>a.txt
+for m in $submods;do
+    echo "wf-one $m"
+    cd $m
+    git checkout master
+    git pull
+    echo a new line from submod: $m user: $USER >>$m.txt
+    git add .
+    git commit -m "Add a line in repo: $m, user $USER"
+    git push
+    cd ..
+done
+#
+# Add the work to the super module and push it.
+#
+git pull
 git add .
-git commit -m "Add a line in repo: $repo, user $USER"
-git pull && git push
-#
-# Update supermodule
-#
-cd ..
-git add .
-git commit -m "update submodule $repo, user $USER"
-git pull && git push
+git commit -m "update supermodule $m, user $USER"
+git push

@@ -1,5 +1,7 @@
 #!/bin/bash
 #
+# Copyright (C) 2008-2018 Guy Allard
+#
 # This file is part of the git Submodules Workflows project.
 #
 #    The git Submodules Workflows project is free software: you can redistribute it 
@@ -21,16 +23,14 @@ set -x
 #
 # Housekeeping.
 #
-here=$(dirname $0)
-. $here/../common/setvars
+hn=$(dirname $0)
+source $hn/../common/setvars
 #
+cd
+rm -rf super
 git clone $public/super.git super
 cd super
 for submod in $submods
 do
-	git submodule init $submod
-	git submodule update $submod
-	cd $submod
-	git checkout master
-	cd ..
+	git clone $public/$submod.git
 done

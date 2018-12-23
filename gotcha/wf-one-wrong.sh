@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# Copyright (C) 2008 Guy Allard
+# Copyright (C) 2008-2018 Guy Allard
 #
 # This file is part of the git Submodules Workflows project.
 #
@@ -30,7 +30,7 @@ umask 002
 #
 # Do work in a submodule
 #
-cd suba
+cd submoda
 echo aline no push submod:  $repo  user: $USER >>a.txt
 git add .
 git commit -m "Add a line in repo: $repo, user $USER, no push"
