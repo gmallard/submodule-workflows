@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# Copyright (C) 2008 Guy Allard
+# Copyright (C) 2008-2018 Guy Allard
 #
 # This file is part of the git Submodules Workflows project.
 #
@@ -22,16 +22,23 @@
 set -x
 #
 umask 002
+hn=$(dirname $0)
+source $hn/../common/setvars
 #
 # Pull updates from supermodule
 #
+git checkout master
 git pull
 git submodule update
 #
 # And updates from submodule
 #
-cd suba
-git checkout master
-git pull
-cd ..
+for m in $submods;do
+    echo "wf-two $m"
+    cd $m
+    git checkout master
+    git pull
+    cat $m.txt
+    cd ..
+done
 

@@ -34,13 +34,12 @@ public=/home/opt/public/repos
 #
 # List of submodules to create.
 #
-submods="suba subb"
+submods="submoda submodb"
 #
 # Only do one super.
 #
 supers="super"
 #
-# Test repos for empty supermodule experiment
+# Test repo for empty supermodule experiment.  Only one.
 #
-testrepos="a b"
-
+testrepos="testra"
